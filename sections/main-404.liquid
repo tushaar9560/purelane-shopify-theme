@@ -13,7 +13,7 @@
 <div class="template-404 page-width page-margin center" data-debug-404="true">
 {% comment %} #region agent log {% endcomment %}
 <script>
-  fetch('http://127.0.0.1:7317/ingest/54be5e12-6d21-4405-a65a-d0ddbbeea765',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'47304c'},body:JSON.stringify({sessionId:'47304c',runId:'pre-fix',hypothesisId:'D',location:'sections/main-404.liquid',message:'404 template rendered',data:{path:{{ request.path | json }},pageType:{{ request.page_type | json }},template:{{ template | json }}},timestamp:Date.now()})}).catch(function(){});
+  fetch('http://127.0.0.1:7317/ingest/54be5e12-6d21-4405-a65a-d0ddbbeea765',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'47304c'},body:JSON.stringify({sessionId:'47304c',runId:'post-fix',hypothesisId:'D',location:'sections/main-404.liquid',message:'404 template rendered',data:{path:{{ request.path | json }},pageType:{{ request.page_type | json }},template:{{ template | json }}},timestamp:Date.now()})}).catch(function(){});
 </script>
 {% comment %} #endregion {% endcomment %}
   <p>

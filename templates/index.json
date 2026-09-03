@@ -1,4 +1,5 @@
 {
+  "layout": "theme",
   "sections": {
     "purelane_hero": {
       "type": "purelane-hero",
@@ -175,47 +176,6 @@
       "settings": {
         "heading": "Sourced from nature"
       }
-    },
-    "purelane_how": {
-      "type": "purelane-how",
-      "blocks": {
-        "pillar_1": {
-          "type": "pillar",
-          "settings": {
-            "icon_type": "bubbles",
-            "title": "Less scrubbing",
-            "description": "A foaming formulation. The foam clings to grease and lifts it, so you wipe instead of scrub.",
-            "button_text": "Learn more",
-            "delay_class": ""
-          }
-        },
-        "pillar_2": {
-          "type": "pillar",
-          "settings": {
-            "icon_type": "shield",
-            "title": "Clean ingredients",
-            "description": "No sulphates, no chlorine, no synthetic fragrance. Nothing on the label you would not want near your food.",
-            "button_text": "Learn more",
-            "delay_class": "rv-d2"
-          }
-        },
-        "pillar_3": {
-          "type": "pillar",
-          "settings": {
-            "icon_type": "heart",
-            "title": "Safe around everyone",
-            "description": "Gentle on hands, safe around kids and pets, and it leaves no toxic residue on the surfaces you touch every day.",
-            "button_text": "Learn more",
-            "delay_class": "rv-d3"
-          }
-        }
-      },
-      "block_order": [
-        "pillar_1",
-        "pillar_2",
-        "pillar_3"
-      ],
-      "settings": {}
     },
     "purelane_proof": {
       "type": "purelane-proof",
@@ -485,7 +445,6 @@
     "purelane_hero",
     "purelane_reviews",
     "purelane_ingredients",
-    "purelane_how",
     "purelane_proof",
     "purelane_combos",
     "purelane_bundles",
