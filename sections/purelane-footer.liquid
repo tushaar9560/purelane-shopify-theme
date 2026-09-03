@@ -1,0 +1,114 @@
+<!-- ================= FOOTER ================= -->
+<footer data-scene="4">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fcol">
+        <a class="brand" href="{{ routes.root_url }}" style="margin-bottom:16px">
+          <span class="mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#b8701c" aria-hidden="true">
+              <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+              <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+              <path d="M12 21v-6"/>
+            </svg>
+          </span>
+          <span class="txt">
+            <span class="n1">{{ section.settings.brand_title | default: 'Purelane' }}</span>
+            <span class="n2">{{ section.settings.brand_subtitle | default: 'Clean, simply' }}</span>
+          </span>
+        </a>
+        <p style="max-width:30ch">{{ section.settings.bio | default: 'Effective cleaning, powered by nature. Made for Indian homes since day one.' }}</p>
+      </div>
+
+      <div class="fcol">
+        <h5>Shop</h5>
+        <a href="#shop">Kitchen</a>
+        <a href="#shop">Laundry</a>
+        <a href="#shop">Bathroom</a>
+        <a href="#shop">Floor</a>
+        <a href="#shop">Skin</a>
+        <a href="#bundles">Starter kits</a>
+      </div>
+
+      <div class="fcol">
+        <h5>About</h5>
+        <a href="#how">How it works</a>
+        <a href="#ingredients">Sustainability</a>
+        <a href="#proof">FAQs</a>
+        <a href="#reviews">Reviews</a>
+      </div>
+
+      <div class="fcol">
+        <h5>Get in touch</h5>
+        <a href="mailto:{{ section.settings.email | default: 'hello@purelane.com' }}">{{ section.settings.email | default: 'hello@purelane.com' }}</a>
+        <a href="tel:{{ section.settings.phone | default: '+919930123234' }}">{{ section.settings.phone_display | default: '+91 9930 123 234' }}</a>
+        <p style="font-size:12px;color:rgba(236,230,247,.5)">{{ section.settings.company_name | default: 'Purelane Eco Products Pvt Ltd' }}</p>
+      </div>
+    </div>
+
+    <div class="fbot">
+      <span>© {{ 'now' | date: "%Y" }} {{ section.settings.copyright_name | default: 'Purelane Eco Products Private Limited' }}</span>
+      <span>Privacy · Terms · Refunds · Contact</span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Purelane Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_title",
+      "label": "Brand Name",
+      "default": "Purelane"
+    },
+    {
+      "type": "text",
+      "id": "brand_subtitle",
+      "label": "Brand Tagline",
+      "default": "Clean, simply"
+    },
+    {
+      "type": "textarea",
+      "id": "bio",
+      "label": "Brand Bio",
+      "default": "Effective cleaning, powered by nature. Made for Indian homes since day one."
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Contact Email",
+      "default": "hello@purelane.com"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone Tel Link",
+      "default": "+919930123234"
+    },
+    {
+      "type": "text",
+      "id": "phone_display",
+      "label": "Phone Display",
+      "default": "+91 9930 123 234"
+    },
+    {
+      "type": "text",
+      "id": "company_name",
+      "label": "Company Legal Name",
+      "default": "Purelane Eco Products Pvt Ltd"
+    },
+    {
+      "type": "text",
+      "id": "copyright_name",
+      "label": "Copyright Name",
+      "default": "Purelane Eco Products Private Limited"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Footer"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,46 @@
+<!-- ================= STICKY CTA ================= -->
+<div class="sticky">
+  <span class="lbl">
+    <b>{{ section.settings.bold_text | default: 'Pick any 3, pay ₹499' }}</b>
+    <span>{{ section.settings.sub_text | default: 'Free shipping, always' }}</span>
+  </span>
+  <a class="btn btn-primary btn-sm" href="{{ section.settings.button_url | default: '#bundles' }}">
+    {{ section.settings.button_text | default: 'Build bundle' }}
+  </a>
+</div>
+
+{% schema %}
+{
+  "name": "Purelane Sticky CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "bold_text",
+      "label": "Bold Callout",
+      "default": "Pick any 3, pay ₹499"
+    },
+    {
+      "type": "text",
+      "id": "sub_text",
+      "label": "Subtext",
+      "default": "Free shipping, always"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Build bundle"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Sticky CTA"
+    }
+  ]
+}
+{% endschema %}

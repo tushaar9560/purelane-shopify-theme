@@ -1,0 +1,71 @@
+<!-- ================= TICKER ================= -->
+<div class="ticker" aria-hidden="true">
+  <div class="track">
+    {%- for i in (1..2) -%}
+      {%- for block in section.blocks -%}
+        <span>{{ block.settings.text }} <b>{{ block.settings.bold_text }}</b></span>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Purelane Ticker",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Ticker Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Prefix Text",
+          "default": "Free shipping"
+        },
+        {
+          "type": "text",
+          "id": "bold_text",
+          "label": "Bold Highlight Text",
+          "default": "on every bundle across India"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Ticker",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "text": "Free shipping",
+            "bold_text": "on every bundle across India"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "100% plant-based",
+            "bold_text": "and non-toxic"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Loved by",
+            "bold_text": "30,000+ happy homes"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Buy 3",
+            "bold_text": "at flat ₹499"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

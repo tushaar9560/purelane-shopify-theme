@@ -1,0 +1,148 @@
+<!-- ================= FIND THE RIGHT BUNDLE ================= -->
+<section class="sec" id="categories" data-scene="4">
+  <div class="wrap">
+    <div class="panel-head rv">
+      <span class="kicker">{{ section.settings.kicker | default: 'Bundle categories' }}</span>
+      <h2 class="d2" style="margin-top:12px">{{ section.settings.heading | default: 'Find the right bundle for you' }}</h2>
+    </div>
+    <div class="cats">
+      <a class="glass cat rv" href="{{ section.settings.cat1_url | default: '#combos' }}">
+        <span class="ph"><span class="pimg p-kitchen" role="img" aria-label="Kitchen cleaner"></span></span>
+        <span class="txt">
+          <h4>{{ section.settings.cat1_title | default: 'Kitchen bundle' }}</h4>
+          <p>{{ section.settings.cat1_desc | default: 'Grease, dishes & more' }}</p>
+        </span>
+      </a>
+      <a class="glass cat rv rv-d1" href="{{ section.settings.cat2_url | default: '#combos' }}">
+        <span class="ph"><span class="pimg p-toilet" role="img" aria-label="Toilet cleaner"></span></span>
+        <span class="txt">
+          <h4>{{ section.settings.cat2_title | default: 'Bathroom bundle' }}</h4>
+          <p>{{ section.settings.cat2_desc | default: 'Deep clean & disinfect' }}</p>
+        </span>
+      </a>
+      <a class="glass cat rv rv-d2" href="{{ section.settings.cat3_url | default: '#combos' }}">
+        <span class="ph"><span class="pimg p-laundry" role="img" aria-label="Laundry detergent"></span></span>
+        <span class="txt">
+          <h4>{{ section.settings.cat3_title | default: 'Laundry bundle' }}</h4>
+          <p>{{ section.settings.cat3_desc | default: 'Softer, fresher wash' }}</p>
+        </span>
+      </a>
+      <a class="glass cat rv rv-d3" href="{{ section.settings.cat4_url | default: '#combos' }}">
+        <span class="ph"><span class="pimg p-tap" role="img" aria-label="Tap cleaner"></span></span>
+        <span class="txt">
+          <h4>{{ section.settings.cat4_title | default: 'Hard water bundle' }}</h4>
+          <p>{{ section.settings.cat4_desc | default: 'Melt away limescale' }}</p>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Bundle categories"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find the right bundle for you"
+    },
+    {
+      "type": "header",
+      "content": "Category 1"
+    },
+    {
+      "type": "text",
+      "id": "cat1_title",
+      "label": "Category 1 Title",
+      "default": "Kitchen bundle"
+    },
+    {
+      "type": "text",
+      "id": "cat1_desc",
+      "label": "Category 1 Description",
+      "default": "Grease, dishes & more"
+    },
+    {
+      "type": "url",
+      "id": "cat1_url",
+      "label": "Category 1 Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 2"
+    },
+    {
+      "type": "text",
+      "id": "cat2_title",
+      "label": "Category 2 Title",
+      "default": "Bathroom bundle"
+    },
+    {
+      "type": "text",
+      "id": "cat2_desc",
+      "label": "Category 2 Description",
+      "default": "Deep clean & disinfect"
+    },
+    {
+      "type": "url",
+      "id": "cat2_url",
+      "label": "Category 2 Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 3"
+    },
+    {
+      "type": "text",
+      "id": "cat3_title",
+      "label": "Category 3 Title",
+      "default": "Laundry bundle"
+    },
+    {
+      "type": "text",
+      "id": "cat3_desc",
+      "label": "Category 3 Description",
+      "default": "Softer, fresher wash"
+    },
+    {
+      "type": "url",
+      "id": "cat3_url",
+      "label": "Category 3 Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 4"
+    },
+    {
+      "type": "text",
+      "id": "cat4_title",
+      "label": "Category 4 Title",
+      "default": "Hard water bundle"
+    },
+    {
+      "type": "text",
+      "id": "cat4_desc",
+      "label": "Category 4 Description",
+      "default": "Melt away limescale"
+    },
+    {
+      "type": "url",
+      "id": "cat4_url",
+      "label": "Category 4 Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Categories"
+    }
+  ]
+}
+{% endschema %}
