@@ -346,6 +346,8 @@
       role="main"
       tabindex="-1"
       data-template="{{ template.name }}"
+      data-page-type="{{ request.page_type }}"
+      data-path="{{ request.path }}"
     >
       {{ content_for_layout }}
     </main>
@@ -411,5 +413,49 @@
     {%- endif -%}
 
     <script src="{{ 'purelane-theme.js' | asset_url }}" defer="defer"></script>
+    {% comment %} #region agent log {% endcomment %}
+    <script>
+      (function () {
+        var main = document.getElementById('MainContent');
+        var payload = {
+          sessionId: '47304c',
+          runId: 'pre-fix',
+          hypothesisId: 'A',
+          location: 'layout/theme.liquid:storefront-probe',
+          message: 'storefront template probe',
+          timestamp: Date.now(),
+          data: {
+            liquidTemplate: {{ template | json }},
+            liquidTemplateName: {{ template.name | json }},
+            pageType: {{ request.page_type | json }},
+            path: {{ request.path | json }},
+            origin: {{ request.origin | json }},
+            theme: window.Shopify && Shopify.theme
+              ? {
+                  id: Shopify.theme.id,
+                  name: Shopify.theme.name,
+                  role: Shopify.theme.role,
+                  schema_name: Shopify.theme.schema_name,
+                }
+              : null,
+            dataTemplate: main ? main.getAttribute('data-template') : null,
+            dataPageType: main ? main.getAttribute('data-page-type') : null,
+            dataPath: main ? main.getAttribute('data-path') : null,
+            has404: !!document.querySelector('.template-404'),
+            hasHeroHeading: !!(document.body && document.body.innerText && document.body.innerText.indexOf('Plant power') !== -1),
+            sectionIds: Array.prototype.map.call(document.querySelectorAll('.shopify-section[id]'), function (el) {
+              return el.id;
+            }).slice(0, 20),
+            title: document.title,
+          },
+        };
+        fetch('http://127.0.0.1:7317/ingest/54be5e12-6d21-4405-a65a-d0ddbbeea765', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '47304c' },
+          body: JSON.stringify(payload),
+        }).catch(function () {});
+      })();
+    </script>
+    {% comment %} #endregion {% endcomment %}
   </body>
 </html>
