@@ -1,0 +1,31 @@
+{
+  "name": "Footer",
+  "type": "footer",
+  "sections": {
+    "purelane_footer": {
+      "type": "purelane-footer",
+      "settings": {
+        "brand_title": "Purelane",
+        "brand_subtitle": "Clean, simply",
+        "bio": "Effective cleaning, powered by nature. Made for Indian homes since day one.",
+        "email": "hello@purelane.com",
+        "phone": "+919930123234",
+        "phone_display": "+91 9930 123 234",
+        "company_name": "Purelane Eco Products Pvt Ltd",
+        "copyright_name": "Purelane Eco Products Private Limited"
+      }
+    },
+    "purelane_sticky_cta": {
+      "type": "purelane-sticky-cta",
+      "settings": {
+        "bold_text": "Pick any 3, pay ₹499",
+        "sub_text": "Free shipping, always",
+        "button_text": "Build bundle"
+      }
+    }
+  },
+  "order": [
+    "purelane_footer",
+    "purelane_sticky_cta"
+  ]
+}

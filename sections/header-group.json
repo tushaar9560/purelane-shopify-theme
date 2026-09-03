@@ -1,0 +1,57 @@
+{
+  "name": "Header",
+  "type": "header",
+  "sections": {
+    "purelane_ticker": {
+      "type": "purelane-ticker",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "text": "Free shipping",
+            "bold_text": "on every bundle across India"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "text": "100% plant-based",
+            "bold_text": "and non-toxic"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "text": "Loved by",
+            "bold_text": "30,000+ happy homes"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "text": "Buy 3",
+            "bold_text": "at flat ₹499"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ],
+      "settings": {}
+    },
+    "purelane_header": {
+      "type": "purelane-header",
+      "settings": {
+        "brand_title": "Purelane",
+        "brand_subtitle": "Clean, simply"
+      }
+    }
+  },
+  "order": [
+    "purelane_ticker",
+    "purelane_header"
+  ]
+}
