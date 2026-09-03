@@ -1,0 +1,122 @@
+<!-- ================= SCENES & WATER CINEMATICS ================= -->
+<div class="scenes" id="scenes" data-d="1" aria-hidden="true">
+  <div class="scene s1 on"></div>
+  <div class="scene s2"></div>
+  <div class="scene s3"></div>
+  <div class="scene s4"></div>
+
+  <div class="water" id="water">
+    <div class="wl wl-a">
+      <svg class="sv" viewBox="0 0 1800 1100" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <filter id="c1" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.012 0.022" numOctaves="3" seed="5" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="48" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <linearGradient id="cg1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity=".72"/>
+            <stop offset="42%" stop-color="#dffff2" stop-opacity=".28"/>
+            <stop offset="100%" stop-color="#241a3d" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <g filter="url(#c1)" stroke="url(#cg1)" stroke-width="1.8" fill="none" opacity=".62">
+          <ellipse cx="280" cy="180" rx="220" ry="110"/>
+          <ellipse cx="640" cy="260" rx="300" ry="140"/>
+          <ellipse cx="1120" cy="200" rx="340" ry="150"/>
+          <ellipse cx="1520" cy="300" rx="260" ry="120"/>
+          <ellipse cx="400" cy="560" rx="320" ry="150"/>
+          <ellipse cx="900" cy="520" rx="360" ry="170"/>
+          <ellipse cx="1380" cy="620" rx="300" ry="140"/>
+          <ellipse cx="260" cy="880" rx="280" ry="130"/>
+          <ellipse cx="780" cy="920" rx="380" ry="160"/>
+          <ellipse cx="1280" cy="900" rx="320" ry="140"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="wl wl-b">
+      <svg class="sv" viewBox="0 0 1800 1100" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <filter id="c2" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.018 0.012" numOctaves="3" seed="14" result="n2"/>
+            <feDisplacementMap in="SourceGraphic" in2="n2" scale="58" xChannelSelector="G" yChannelSelector="B"/>
+          </filter>
+          <linearGradient id="cg2" x1="1" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity=".65"/>
+            <stop offset="50%" stop-color="#c2f5dc" stop-opacity=".22"/>
+            <stop offset="100%" stop-color="#0b8578" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <g filter="url(#c2)" stroke="url(#cg2)" stroke-width="2.2" fill="none" opacity=".5">
+          <path d="M-60 140 C 240 80, 520 220, 840 130 C 1160 40, 1480 200, 1900 110"/>
+          <path d="M-40 320 C 260 220, 560 380, 920 280 C 1240 180, 1540 340, 1920 260"/>
+          <path d="M-50 500 C 280 420, 600 580, 940 470 C 1280 360, 1580 520, 1920 440"/>
+          <path d="M-60 700 C 240 600, 560 760, 900 660 C 1260 560, 1560 720, 1900 640"/>
+          <path d="M-30 880 C 300 800, 620 940, 960 840 C 1280 740, 1600 900, 1940 820"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="wl wl-c">
+      <svg class="sv" viewBox="0 0 1800 1100" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f4fff9" stop-opacity=".85"/>
+            <stop offset=".38" stop-color="#dcf6e7" stop-opacity=".28"/>
+            <stop offset="1" stop-color="#d4f2e2" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <g>
+          <polygon points="95,-80 152,-80 517,1180 439,1180" fill="url(#sg)" opacity="0.26"/>
+          <polygon points="433,-80 491,-80 885,1180 807,1180" fill="url(#sg)" opacity="0.41"/>
+          <polygon points="751,-80 919,-80 1180,1180 953,1180" fill="url(#sg)" opacity="0.31"/>
+          <polygon points="1048,-80 1135,-80 1400,1180 1282,1180" fill="url(#sg)" opacity="0.28"/>
+          <polygon points="1366,-80 1520,-80 1898,1180 1690,1180" fill="url(#sg)" opacity="0.28"/>
+          <polygon points="1695,-80 1808,-80 2067,1180 1914,1180" fill="url(#sg)" opacity="0.35"/>
+          <polygon points="1948,-80 2013,-80 2341,1180 2254,1180" fill="url(#sg)" opacity="0.32"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="wl wl-s">
+      <svg class="sv" viewBox="0 0 1800 1100" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="sf" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/>
+            <stop offset=".55" stop-color="#e8fff2" stop-opacity=".16"/>
+            <stop offset="1" stop-color="#e8fff2" stop-opacity="0"/>
+          </linearGradient>
+          <filter id="sfw" x="-10%" y="-40%" width="120%" height="180%" color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.004 0.05" numOctaves="2" seed="9" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="30" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+        </defs>
+        <g filter="url(#sfw)">
+          <rect x="-100" y="-40" width="2000" height="150" fill="url(#sf)"/>
+          <rect x="-100" y="60" width="2000" height="60" fill="url(#sf)" opacity=".5"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="bub">
+      <span style="--x:91.9%;--s:6.7px;--dur:21.5s;--dly:19.0s;--drift:-11px"></span>
+      <span style="--x:43.4%;--s:5.7px;--dur:26.8s;--dly:16.1s;--drift:-11px"></span>
+      <span style="--x:96.6%;--s:6.2px;--dur:13.7s;--dly:10.3s;--drift:38px"></span>
+      <span style="--x:6.0%;--s:3.6px;--dur:24.4s;--dly:10.6s;--drift:3px"></span>
+      <span style="--x:70.3%;--s:3.3px;--dur:20.9s;--dly:9.2s;--drift:-39px"></span>
+      <span style="--x:67.7%;--s:4.0px;--dur:27.0s;--dly:16.5s;--drift:-5px"></span>
+      <span style="--x:2.1%;--s:7.1px;--dur:22.0s;--dly:3.1s;--drift:-37px"></span>
+      <span style="--x:69.4%;--s:8.1px;--dur:21.9s;--dly:10.7s;--drift:-24px"></span>
+      <span style="--x:64.1%;--s:8.2px;--dur:17.3s;--dly:9.0s;--drift:2px"></span>
+      <span style="--x:21.8%;--s:7.1px;--dur:15.7s;--dly:18.4s;--drift:-13px"></span>
+      <span style="--x:61.9%;--s:6.6px;--dur:26.3s;--dly:7.2s;--drift:-23px"></span>
+      <span style="--x:45.9%;--s:8.9px;--dur:24.3s;--dly:7.2s;--drift:20px"></span>
+      <span style="--x:52.5%;--s:3.3px;--dur:20.2s;--dly:19.6s;--drift:-31px"></span>
+      <span style="--x:11.1%;--s:7.9px;--dur:20.4s;--dly:10.8s;--drift:-40px"></span>
+      <span style="--x:7.6%;--s:6.4px;--dur:19.5s;--dly:0.2s;--drift:-26px"></span>
+      <span style="--x:18.6%;--s:9.0px;--dur:24.5s;--dly:8.7s;--drift:13px"></span>
+    </div>
+  </div>
+
+  <div class="vig"></div>
+</div>
