@@ -1,17 +1,21 @@
 {% comment %}
-  Renders a Purelane styled product card
-  Accepts:
-  - product: {Object} Shopify Product object
-  - card_badge: {String} Optional badge override
-  - custom_class: {String} Optional additional CSS classes
-  - delay_class: {String} Stagger reveal class (e.g. rv-d1, rv-d2)
+  Purelane product card. Kept to simple Liquid so GitHub theme sync will upload it.
+  Accepts: product, card_badge, custom_class, delay_class
 {% endcomment %}
 
 {%- liquid
-  assign rating = product.metafields.custom.rating.value | default: 4.8
-  assign reviews_count = product.metafields.custom.reviews_count.value | default: 230
-  assign badge = card_badge | default: product.metafields.custom.badge.value
-
+  assign rating = 4.8
+  assign reviews_count = 230
+  if product.metafields.custom.rating.value != blank
+    assign rating = product.metafields.custom.rating.value
+  endif
+  if product.metafields.custom.reviews_count.value != blank
+    assign reviews_count = product.metafields.custom.reviews_count.value
+  endif
+  assign badge = card_badge
+  if badge == blank
+    assign badge = product.metafields.custom.badge.value
+  endif
   if badge == blank
     for tag in product.tags
       if tag contains 'badge:'
@@ -20,10 +24,10 @@
       endif
     endfor
   endif
-
   if badge == blank and product.available == false
     assign badge = 'Sold out'
   endif
+  assign product_alt = product.title | escape
 -%}
 
 <article class="glass card rv {{ delay_class }} {% unless product.available %}sold-out{% endunless %} {{ custom_class }}" data-product-id="{{ product.id }}">
@@ -33,16 +37,17 @@
     {%- endif -%}
 
     {%- if product.featured_image != blank -%}
-      <a href="{{ product.url }}" class="purelane-shot-link" aria-label="{{ product.title | escape }}">
-        {{ product.featured_image | image_url: width: 400 | image_tag: 
-          loading: 'lazy', 
-          alt: product.title | escape,
-          widths: '200, 300, 400',
-          sizes: '(min-width: 960px) 260px, (min-width: 640px) 50vw, 100vw'
-        }}
+      <a href="{{ product.url }}" class="purelane-shot-link" aria-label="{{ product_alt }}">
+        <img
+          src="{{ product.featured_image | image_url: width: 400 }}"
+          alt="{{ product_alt }}"
+          loading="lazy"
+          width="400"
+          height="400"
+        >
       </a>
     {%- else -%}
-      <a href="{{ product.url }}" class="purelane-fallback-shot" aria-label="{{ product.title | escape }}">
+      <a href="{{ product.url }}" class="purelane-fallback-shot" aria-label="{{ product_alt }}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
           <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
@@ -53,8 +58,8 @@
     {%- endif -%}
   </div>
 
-  <h4 title="{{ product.title | escape }}">
-    <a href="{{ product.url }}">{{ product.title }}</a>
+  <h4 title="{{ product_alt }}">
+    <a href="{{ product.url }}">{{ product.title | escape }}</a>
   </h4>
 
   <div class="rate">
@@ -65,26 +70,23 @@
     <strong>{{ product.price | money_without_trailing_zeros }}</strong>
     {%- if product.compare_at_price > product.price -%}
       <s>{{ product.compare_at_price | money_without_trailing_zeros }}</s>
-      {%- assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+      {%- assign savings = product.compare_at_price | minus: product.price -%}
+      {%- assign discount = savings | times: 100.0 | divided_by: product.compare_at_price | round -%}
       <em>{{ discount }}% off</em>
     {%- endif -%}
   </div>
 
   {%- if product.available -%}
-    <button 
-      type="button" 
-      class="btn btn-ghost btn-sm purelane-add-to-cart-btn" 
+    <button
+      type="button"
+      class="btn btn-ghost btn-sm purelane-add-to-cart-btn"
       data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-      aria-label="Add {{ product.title | escape }} to cart">
+      aria-label="Add {{ product_alt }} to cart"
+    >
       Add to cart
     </button>
   {%- else -%}
-    <button 
-      type="button" 
-      class="btn btn-ghost btn-sm" 
-      disabled 
-      aria-disabled="true"
-      aria-label="{{ product.title | escape }} is sold out">
+    <button type="button" class="btn btn-ghost btn-sm" disabled aria-disabled="true" aria-label="{{ product_alt }} is sold out">
       Sold out
     </button>
   {%- endif -%}
