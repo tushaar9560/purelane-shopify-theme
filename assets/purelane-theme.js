@@ -322,6 +322,34 @@
         requestFrame();
       }, { passive: true });
     }
+
+    // #region agent log
+    (function logLayout() {
+      var combos = [].slice.call(document.querySelectorAll('.combo'));
+      var tiers = [].slice.call(document.querySelectorAll('.tier'));
+      var priceEls = [].slice.call(document.querySelectorAll('.combo .prow strong, .tier .price, .card .pr strong'));
+      var main = document.getElementById('MainContent');
+      var payload = {
+        sessionId: '47304c',
+        runId: 'post-fix',
+        location: 'purelane-theme.js:initAll',
+        message: 'rupee and equal-height probe',
+        timestamp: Date.now(),
+        hypothesisId: 'A',
+        data: {
+          shopCurrency: main ? main.getAttribute('data-shop-currency') : null,
+          samplePrices: priceEls.slice(0, 6).map(function (el) { return (el.textContent || '').trim(); }),
+          hasDollar: priceEls.some(function (el) { return (el.textContent || '').indexOf('$') !== -1; }),
+          hasRupee: priceEls.some(function (el) { return (el.textContent || '').indexOf('₹') !== -1; }),
+          comboHeights: combos.map(function (el) { return Math.round(el.getBoundingClientRect().height); }),
+          comboHeightUnique: combos.length ? Array.from(new Set(combos.map(function (el) { return Math.round(el.getBoundingClientRect().height); }))) : [],
+          tierHeights: tiers.map(function (el) { return Math.round(el.getBoundingClientRect().height); }),
+          tierHeightUnique: tiers.length ? Array.from(new Set(tiers.map(function (el) { return Math.round(el.getBoundingClientRect().height); }))) : []
+        }
+      };
+      fetch('http://127.0.0.1:7317/ingest/54be5e12-6d21-4405-a65a-d0ddbbeea765',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'47304c'},body:JSON.stringify(payload)}).catch(function(){});
+    })();
+    // #endregion
   }
 
   if (document.readyState === 'loading') {

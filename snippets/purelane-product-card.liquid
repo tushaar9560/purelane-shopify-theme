@@ -60,9 +60,9 @@
   {%- endif -%}
 
   <div class="pr">
-    <strong>{{ product.price | money_without_trailing_zeros }}</strong>
+    <strong>{% render 'purelane-money', amount: product.price %}</strong>
     {%- if product.compare_at_price > product.price -%}
-      <s>{{ product.compare_at_price | money_without_trailing_zeros }}</s>
+      <s>{% render 'purelane-money', amount: product.compare_at_price %}</s>
       {%- assign savings = product.compare_at_price | minus: product.price -%}
       {%- assign discount = savings | times: 100.0 | divided_by: product.compare_at_price | round -%}
       <em>{{ discount }}% off</em>

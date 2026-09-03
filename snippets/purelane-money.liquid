@@ -1,0 +1,7 @@
+{% comment %}
+  Storefront rupee price. Partner dev stores are often USD, so Shopify's
+  money filter prints $. Catalog amounts stay the same; only the glyph changes.
+  Accepts: amount (cents)
+{% endcomment %}
+{%- assign formatted = amount | money_without_currency | strip_html | replace: '.00', '' -%}
+₹{{ formatted -}}

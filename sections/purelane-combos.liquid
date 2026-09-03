@@ -70,7 +70,7 @@
                   {%- if block.settings.save_badge != blank -%}
                     {{ block.settings.save_badge | escape }}
                   {%- else -%}
-                    You save {{ savings | money_without_trailing_zeros }}
+                    You save {% render 'purelane-money', amount: savings %}
                   {%- endif -%}
                 </span>
               {%- elsif block.settings.save_badge != blank -%}
@@ -111,10 +111,10 @@
               {%- endif -%}
               {%- if combo_count > 0 -%}
                 <div class="prow">
-                  <strong>{{ sale_price | money_without_trailing_zeros }}</strong>
+                  <strong>{% render 'purelane-money', amount: sale_price %}</strong>
                   {%- if compare_total > sale_price -%}
-                    <s>{{ compare_total | money_without_trailing_zeros }}</s>
-                    <em>Save {{ savings | money_without_trailing_zeros }}</em>
+                    <s>{% render 'purelane-money', amount: compare_total %}</s>
+                    <em>Save {% render 'purelane-money', amount: savings %}</em>
                   {%- endif -%}
                 </div>
               {%- endif -%}

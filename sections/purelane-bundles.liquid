@@ -45,7 +45,7 @@
             endif
             assign per_product = 0
             if qty > 0 and sale_price > 0
-              assign per_product = sale_price | divided_by: qty
+              assign per_product = sale_price | times: 1.0 | divided_by: qty | round
             endif
           -%}
           <article class="glass tier {% if block.settings.is_featured %}featured{% endif %} rv" {{ block.shopify_attributes }}>
@@ -64,16 +64,16 @@
             {%- endif -%}
             {%- if sale_price > 0 -%}
               <div class="price">
-                {{ sale_price | money_without_trailing_zeros }}
+                {% render 'purelane-money', amount: sale_price %}
                 {%- if compare_total > sale_price -%}
-                  <s>{{ compare_total | money_without_trailing_zeros }}</s>
+                  <s>{% render 'purelane-money', amount: compare_total %}</s>
                 {%- endif -%}
               </div>
             {%- endif -%}
             {%- if block.settings.rate_note != blank -%}
               <p class="body-s" style="font-size:12px">{{ block.settings.rate_note | escape }}</p>
             {%- elsif per_product > 0 -%}
-              <p class="body-s" style="font-size:12px">Flat {{ per_product | money_without_trailing_zeros }} per product</p>
+              <p class="body-s" style="font-size:12px">Flat {% render 'purelane-money', amount: per_product %} per product</p>
             {%- endif -%}
             <ul>
               {%- if block.settings.feature_1 != blank -%}
