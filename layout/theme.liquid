@@ -347,24 +347,7 @@
       tabindex="-1"
       data-template="{{ template.name }}"
     >
-      {%- if request.path == '/' or template.name == 'index' or template == 'index' or template.name == '404' and request.path == '/' -%}
-        {% section 'purelane-hero' %}
-        {% section 'purelane-reviews' %}
-        {% section 'purelane-ingredients' %}
-        {% section 'purelane-how' %}
-        {% section 'purelane-proof' %}
-        {% section 'purelane-combos' %}
-        {% section 'purelane-bundles' %}
-        {% section 'purelane-shop' %}
-        {% section 'purelane-range' %}
-        {% section 'purelane-why-bundles' %}
-        {% section 'purelane-categories' %}
-        {% section 'purelane-trust' %}
-        {% section 'purelane-newsletter' %}
-        <div style="display:none !important;" aria-hidden="true">{{ content_for_layout }}</div>
-      {%- else -%}
-        {{ content_for_layout }}
-      {%- endif -%}
+      {{ content_for_layout }}
     </main>
 
     {% sections 'footer-group' %}
