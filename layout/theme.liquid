@@ -326,7 +326,7 @@
     {{ 'purelane-theme.css' | asset_url | stylesheet_tag }}
   </head>
 
-  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  <body{% if settings.animations_hover_elements != 'none' %} class="animate--hover-{{ settings.animations_hover_elements }}"{% endif %}>
     {% render 'purelane-ambient-bg' %}
     {% render 'purelane-rail' %}
 

@@ -304,6 +304,40 @@
         requestFrame();
       }, { passive: true });
     }
+
+    // #region agent log
+    (function logPalette() {
+      var body = getComputedStyle(document.body);
+      var s1 = document.querySelector('.s1');
+      var rail = document.querySelector('.comborail');
+      var h1 = document.querySelector('.hero h1');
+      var payload = {
+        sessionId: '47304c',
+        runId: 'post-fix',
+        location: 'purelane-theme.js:initAll',
+        message: 'palette and art probe',
+        timestamp: Date.now(),
+        data: {
+          ink: body.getPropertyValue('--ink').trim(),
+          paper: body.getPropertyValue('--paper').trim(),
+          bodyBg: body.backgroundColor,
+          bodyAttachment: body.backgroundAttachment,
+          bodyHasGradient: document.body.classList.contains('gradient'),
+          s1Bg: s1 ? getComputedStyle(s1).backgroundImage.slice(0, 160) : null,
+          h1: h1 ? (h1.innerText || '').replace(/\s+/g, ' ').trim() : null,
+          pimgCount: document.querySelectorAll('.card .pimg').length,
+          cardImgCount: document.querySelectorAll('.card img').length,
+          comboOverflow: rail ? getComputedStyle(rail).overflowX : null,
+          comboCount: document.querySelectorAll('.combo').length
+        }
+      };
+      payload.hypothesisId = 'A';
+      fetch('http://127.0.0.1:7317/ingest/54be5e12-6d21-4405-a65a-d0ddbbeea765',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'47304c'},body:JSON.stringify(payload)}).catch(function(){});
+      payload.hypothesisId = 'B';
+      payload.message = 'shop card art probe';
+      fetch('http://127.0.0.1:7317/ingest/54be5e12-6d21-4405-a65a-d0ddbbeea765',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'47304c'},body:JSON.stringify(payload)}).catch(function(){});
+    })();
+    // #endregion
   }
 
   if (document.readyState === 'loading') {

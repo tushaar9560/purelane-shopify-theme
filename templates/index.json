@@ -8,21 +8,21 @@
           "type": "promise",
           "settings": {
             "icon": "leaf",
-            "title": "Plant powered"
+            "title": "Plant\npowered"
           }
         },
         "promise_2": {
           "type": "promise",
           "settings": {
             "icon": "shield",
-            "title": "Kids & pet safe"
+            "title": "Safe for\nkids & pets"
           }
         },
         "promise_3": {
           "type": "promise",
           "settings": {
             "icon": "chemical",
-            "title": "Zero harsh chem"
+            "title": "Zero harsh\nchemicals"
           }
         }
       },
@@ -32,10 +32,10 @@
         "promise_3"
       ],
       "settings": {
-        "kicker": "Clean home, zero poison",
-        "heading": "Plant power.",
-        "heading_accent": "Hospital grade.",
-        "lede": "Floor, kitchen, laundry and glass. Every formula is 100% plant-powered, lab-proven against tough grease and hard water, and completely non-toxic for kids and pets.",
+        "kicker": "",
+        "heading": "Clean\nThat",
+        "heading_accent": "Lasts",
+        "lede": "Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it.",
         "primary_cta_label": "Shop now",
         "primary_cta_url": "#shop",
         "ghost_cta_label": "How it works",
@@ -235,10 +235,10 @@
             "discount_pill": "Save \u20b9448",
             "img1_class": "p-laundry",
             "benefit1": "Removes tough stains & odour",
-            "img2_class": "p-wm",
-            "benefit2": "Deep-cleans your machine",
-            "img3_class": "",
-            "benefit3": ""
+            "img2_class": "tile",
+            "benefit2": "Softens & freshens every wash",
+            "img3_class": "p-wm",
+            "benefit3": "Deep-cleans your machine"
           }
         },
         "combo_3": {

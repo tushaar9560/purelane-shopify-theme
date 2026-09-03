@@ -28,21 +28,21 @@
               <div class="stack">
                 {%- if block.settings.benefit1 != blank -%}
                   <span class="it">
-                    <span class="pimg {{ block.settings.img1_class | default: 'p-kitchen' }}" role="img" aria-label="{{ block.settings.benefit1 }}"></span>
+                    {% render 'purelane-pimg', art: block.settings.img1_class, label: block.settings.benefit1 %}
                     <span>{{ block.settings.benefit1 }}</span>
                   </span>
                 {%- endif -%}
                 {%- if block.settings.benefit2 != blank -%}
                   <span class="plus" aria-hidden="true">+</span>
                   <span class="it">
-                    <span class="pimg {{ block.settings.img2_class | default: 'p-dish' }}" role="img" aria-label="{{ block.settings.benefit2 }}"></span>
+                    {% render 'purelane-pimg', art: block.settings.img2_class, label: block.settings.benefit2 %}
                     <span>{{ block.settings.benefit2 }}</span>
                   </span>
                 {%- endif -%}
                 {%- if block.settings.benefit3 != blank -%}
                   <span class="plus" aria-hidden="true">+</span>
                   <span class="it">
-                    <span class="pimg {{ block.settings.img3_class | default: 'p-tap' }}" role="img" aria-label="{{ block.settings.benefit3 }}"></span>
+                    {% render 'purelane-pimg', art: block.settings.img3_class, label: block.settings.benefit3 %}
                     <span>{{ block.settings.benefit3 }}</span>
                   </span>
                 {%- endif -%}
