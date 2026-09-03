@@ -7,21 +7,21 @@
           "type": "promise",
           "settings": {
             "icon": "leaf",
-            "title": "Plant<br>powered"
+            "title": "Plant powered"
           }
         },
         "promise_2": {
           "type": "promise",
           "settings": {
             "icon": "shield",
-            "title": "Kids &<br>pet safe"
+            "title": "Kids & pet safe"
           }
         },
         "promise_3": {
           "type": "promise",
           "settings": {
             "icon": "chemical",
-            "title": "Zero harsh<br>chem"
+            "title": "Zero harsh chem"
           }
         }
       },
@@ -40,17 +40,17 @@
         "ghost_cta_label": "How it works",
         "ghost_cta_url": "#how",
         "slide1_label": "Single bottle",
-        "slide1_price": "₹200",
-        "slide1_compare": "₹299",
+        "slide1_price": "\u20b9200",
+        "slide1_compare": "\u20b9299",
         "slide1_badge": "33% off",
         "slide2_label": "Any 2 products",
-        "slide2_price": "₹349",
-        "slide2_compare": "₹598",
-        "slide2_badge": "Save ₹249",
+        "slide2_price": "\u20b9349",
+        "slide2_compare": "\u20b9598",
+        "slide2_badge": "Save \u20b9249",
         "slide3_label": "Any 3 products",
-        "slide3_price": "₹499",
-        "slide3_compare": "₹897",
-        "slide3_badge": "Save ₹398"
+        "slide3_price": "\u20b9499",
+        "slide3_compare": "\u20b9897",
+        "slide3_badge": "Save \u20b9398"
       }
     },
     "purelane_reviews": {
@@ -118,7 +118,7 @@
         "kicker": "That's what they said",
         "rating": "4.8",
         "reviews_label": "from 8,000+ reviews",
-        "social_proof": "Loved by <b>12 lakh+</b> homes"
+        "social_proof": "Loved by 12 lakh+ homes"
       }
     },
     "purelane_ingredients": {
@@ -221,7 +221,7 @@
       "type": "purelane-proof",
       "settings": {
         "kicker": "Why it works",
-        "heading": "Tough on grime.<br>Gentle on everything else.",
+        "heading": "Tough on grime. Gentle on everything else.",
         "description": "Every formula is built on plant-derived cleansers and essential oils. It behaves exactly like the cleaner you are used to, minus the things you never signed up for.",
         "button_text": "See the ingredient list",
         "stat1_val": "99.9%",
@@ -245,14 +245,14 @@
           "type": "combo",
           "settings": {
             "is_hero": false,
-            "save_badge": "You save ₹398",
+            "save_badge": "You save \u20b9398",
             "flag": "Most popular",
             "title": "Kitchen essentials",
             "count_text": "3 products",
             "includes_text": "Includes: Foaming Kitchen Cleaner, Dishwash Gel & Tap Cleaner. Everything for a sparkling kitchen, no need to pick separately.",
-            "price": "₹499",
-            "compare_price": "₹897",
-            "discount_pill": "Save ₹398",
+            "price": "\u20b9499",
+            "compare_price": "\u20b9897",
+            "discount_pill": "Save \u20b9398",
             "img1_class": "p-kitchen",
             "benefit1": "Cuts grease instantly",
             "img2_class": "p-dish",
@@ -265,14 +265,14 @@
           "type": "combo",
           "settings": {
             "is_hero": false,
-            "save_badge": "You save ₹448",
+            "save_badge": "You save \u20b9448",
             "flag": "",
             "title": "Laundry care bundle",
             "count_text": "3 products",
             "includes_text": "Includes: Laundry Detergent, Fabric Conditioner & Machine Cleaner Powder. Softer, fresher wash, all in one box.",
-            "price": "₹499",
-            "compare_price": "₹947",
-            "discount_pill": "Save ₹448",
+            "price": "\u20b9499",
+            "compare_price": "\u20b9947",
+            "discount_pill": "Save \u20b9448",
             "img1_class": "p-laundry",
             "benefit1": "Removes tough stains & odour",
             "img2_class": "p-wm",
@@ -290,9 +290,9 @@
             "title": "Complete home bundle",
             "count_text": "5 products",
             "includes_text": "Includes: Kitchen Cleaner, Laundry Detergent, Floor Cleaner, Toilet Cleaner & Handwash. Our biggest saving box.",
-            "price": "₹799",
-            "compare_price": "₹1,495",
-            "discount_pill": "Save ₹696",
+            "price": "\u20b9799",
+            "compare_price": "\u20b91,495",
+            "discount_pill": "Save \u20b9696",
             "img1_class": "p-kitchen",
             "benefit1": "Cuts grease instantly",
             "img2_class": "p-floor",
@@ -305,14 +305,14 @@
           "type": "combo",
           "settings": {
             "is_hero": false,
-            "save_badge": "You save ₹398",
+            "save_badge": "You save \u20b9398",
             "flag": "",
             "title": "Bathroom deep clean",
             "count_text": "3 products",
             "includes_text": "Includes: Toilet Cleaner, Tap Cleaner & Magic Eraser. A complete bathroom refresh in one box.",
-            "price": "₹499",
-            "compare_price": "₹897",
-            "discount_pill": "Save ₹398",
+            "price": "\u20b9499",
+            "compare_price": "\u20b9897",
+            "discount_pill": "Save \u20b9398",
             "img1_class": "p-toilet",
             "benefit1": "Kills 99.9% germs",
             "img2_class": "p-tap",
@@ -325,14 +325,14 @@
           "type": "combo",
           "settings": {
             "is_hero": false,
-            "save_badge": "You save ₹249",
+            "save_badge": "You save \u20b9249",
             "flag": "",
             "title": "Hard water solution kit",
             "count_text": "2 products",
             "includes_text": "Includes: Tap Cleaner & Toilet Cleaner. A quick, focused fix for hard water stains across the home.",
-            "price": "₹349",
-            "compare_price": "₹598",
-            "discount_pill": "Save ₹249",
+            "price": "\u20b9349",
+            "compare_price": "\u20b9598",
+            "discount_pill": "Save \u20b9249",
             "img1_class": "p-tap",
             "benefit1": "Melts hard water stains",
             "img2_class": "p-toilet",
@@ -353,7 +353,7 @@
         "kicker": "Pre-built to save you money",
         "heading": "Best selling combos",
         "lede": "Swipe through the boxes people order most. Each one is already priced below buying the same products on their own.",
-        "railnote": "Tapping \"Shop bundle\" opens the bundle picker with these products already added. You can still swap anything before you pay."
+        "railnote": "Tapping Shop bundle opens the bundle picker with these products already added. You can still swap anything before you pay."
       }
     },
     "purelane_bundles": {
@@ -367,9 +367,9 @@
             "pix_count": "1",
             "product_count": "2",
             "product_count_unit": "Products",
-            "price": "₹349",
-            "compare_price": "₹598",
-            "rate_note": "Flat ₹174 per product",
+            "price": "\u20b9349",
+            "compare_price": "\u20b9598",
+            "rate_note": "Flat \u20b9174 per product",
             "feature_1": "Pick any two products",
             "feature_2": "Free shipping across India",
             "feature_3": "",
@@ -386,9 +386,9 @@
             "pix_count": "3",
             "product_count": "3",
             "product_count_unit": "Products",
-            "price": "₹499",
-            "compare_price": "₹897",
-            "rate_note": "Flat ₹166 per product",
+            "price": "\u20b9499",
+            "compare_price": "\u20b9897",
+            "rate_note": "Flat \u20b9166 per product",
             "feature_1": "Pick any three products",
             "feature_2": "Covers kitchen and laundry",
             "feature_3": "Free shipping across India",
@@ -405,9 +405,9 @@
             "pix_count": "5",
             "product_count": "5",
             "product_count_unit": "Products",
-            "price": "₹799",
-            "compare_price": "₹1495",
-            "rate_note": "Flat ₹160 per product",
+            "price": "\u20b9799",
+            "compare_price": "\u20b91495",
+            "rate_note": "Flat \u20b9160 per product",
             "feature_1": "Pick any five products",
             "feature_2": "Every room in one order",
             "feature_3": "Free shipping across India",
@@ -475,9 +475,9 @@
       "type": "purelane-newsletter",
       "settings": {
         "kicker": "Join the Purelane Club",
-        "heading": "Get ₹100 off your first bundle",
+        "heading": "Get \u20b9100 off your first bundle",
         "lede": "Plus first access to new launches and restocks.",
-        "button_text": "Get my ₹100 off"
+        "button_text": "Get my \u20b9100 off"
       }
     }
   },
