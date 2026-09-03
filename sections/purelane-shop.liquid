@@ -58,31 +58,6 @@
       {%- endif -%}
     </div>
   </div>
-  {% comment %} #region agent log {% endcomment %}
-  <script>
-    (function () {
-      var shop = document.getElementById('shop');
-      var text = shop ? shop.innerText || '' : '';
-      fetch('http://127.0.0.1:7317/ingest/54be5e12-6d21-4405-a65a-d0ddbbeea765', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '47304c' },
-        body: JSON.stringify({
-          sessionId: '47304c',
-          runId: 'post-fix',
-          hypothesisId: 'A',
-          location: 'sections/purelane-shop.liquid',
-          message: 'shop grid snippet probe',
-          timestamp: Date.now(),
-          data: {
-            hasMissingSnippetError: text.indexOf('Could not find asset') !== -1,
-            cardCount: shop ? shop.querySelectorAll('article.card').length : 0,
-            catalogCount: {{ collections.all.products_count | default: 0 }},
-          },
-        }),
-      }).catch(function () {});
-    })();
-  </script>
-  {% comment %} #endregion {% endcomment %}
 </section>
 
 {% schema %}
