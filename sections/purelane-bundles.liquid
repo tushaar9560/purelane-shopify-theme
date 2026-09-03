@@ -8,62 +8,53 @@
       </div>
     </div>
 
-    <div class="tiers">
-      {%- for block in section.blocks -%}
-        <article class="glass tier {% if block.settings.is_featured %}best{% endif %} rv {{ block.settings.delay_class }}" {{ block.shopify_attributes }}>
-          <span class="tag">{{ block.settings.tag | default: 'Bundle' }}</span>
-          
-          <div class="tierpix {% if block.settings.pix_count == '5' %}five{% endif %}" aria-hidden="true">
-            {%- if block.settings.pix_count == '1' -%}
-              <span class="pimg p-combo2" role="img" aria-label="Purelane combo pack"></span>
-            {%- elsif block.settings.pix_count == '3' -%}
-              <span class="pimg p-kitchen" role="img" aria-label="Purelane kitchen cleaner"></span>
-              <span class="pimg p-tap" role="img" aria-label="Purelane tap cleaner"></span>
-              <span class="pimg p-dish" role="img" aria-label="Purelane dishwash"></span>
-            {%- elsif block.settings.pix_count == '5' -%}
-              <span class="pimg p-kitchen" role="img" aria-label="Purelane kitchen cleaner"></span>
-              <span class="pimg p-tap" role="img" aria-label="Purelane tap cleaner"></span>
-              <span class="pimg p-floor" role="img" aria-label="Purelane floor cleaner"></span>
-              <span class="pimg p-toilet" role="img" aria-label="Purelane toilet cleaner"></span>
-              <span class="pimg p-laundry" role="img" aria-label="Purelane laundry detergent"></span>
-            {%- endif -%}
-          </div>
-
-          <div class="qty">{{ block.settings.product_count | default: '3' }}<small>{{ block.settings.product_count_unit | default: 'Products' }}</small></div>
-          <div class="price">{{ block.settings.price | default: '₹499' }} <s>{{ block.settings.compare_price | default: '₹897' }}</s></div>
-          <p class="body-s" style="font-size:12px">{{ block.settings.rate_note | default: 'Flat ₹166 per product' }}</p>
-
-          <ul>
-            {%- if block.settings.feature_1 != blank -%}
-              <li>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>
-                {{ block.settings.feature_1 }}
-              </li>
-            {%- endif -%}
-            {%- if block.settings.feature_2 != blank -%}
-              <li>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>
-                {{ block.settings.feature_2 }}
-              </li>
-            {%- endif -%}
-            {%- if block.settings.feature_3 != blank -%}
-              <li>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>
-                {{ block.settings.feature_3 }}
-              </li>
-            {%- endif -%}
-          </ul>
-
-          <a class="btn {% if block.settings.is_featured %}btn-primary{% else %}btn-ghost{% endif %}" href="{{ block.settings.button_link | default: '#shop' }}">
-            {{ block.settings.button_text | default: 'Build this box' }}
-            {%- if block.settings.is_featured -%}
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M5 12h13m-5-6 6 6-6 6"/>
-              </svg>
-            {%- endif -%}
-          </a>
-        </article>
-      {%- endfor -%}
+        <div class="tiers">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <article class="glass tier {% if block.settings.is_featured %}featured{% endif %} rv {{ block.settings.delay_class }}" {{ block.shopify_attributes }}>
+            <span class="tag">{{ block.settings.tag }}</span>
+            <div class="tierpix {% if block.settings.pix_count == '5' %}five{% endif %}" aria-hidden="true">
+              {%- if block.settings.pix_count == '1' -%}
+                <span class="pimg p-combo2" role="img" aria-label="Purelane combo pack"></span>
+              {%- elsif block.settings.pix_count == '3' -%}
+                <span class="pimg p-kitchen" role="img" aria-label="Purelane kitchen cleaner"></span>
+                <span class="pimg p-tap" role="img" aria-label="Purelane tap cleaner"></span>
+                <span class="pimg p-dish" role="img" aria-label="Purelane dishwash"></span>
+              {%- elsif block.settings.pix_count == '5' -%}
+                <span class="pimg p-kitchen" role="img" aria-label="Purelane kitchen cleaner"></span>
+                <span class="pimg p-tap" role="img" aria-label="Purelane tap cleaner"></span>
+                <span class="pimg p-floor" role="img" aria-label="Purelane floor cleaner"></span>
+                <span class="pimg p-toilet" role="img" aria-label="Purelane toilet cleaner"></span>
+                <span class="pimg p-laundry" role="img" aria-label="Purelane laundry detergent"></span>
+              {%- endif -%}
+            </div>
+            <div class="qty">{{ block.settings.product_count | default: '3' }}<small>{{ block.settings.product_count_unit | default: 'Products' }}</small></div>
+            <div class="price">{{ block.settings.price | default: '₹499' }} <s>{{ block.settings.compare_price | default: '₹897' }}</s></div>
+            <p class="body-s" style="font-size:12px">{{ block.settings.rate_note | default: 'Flat ₹166 per product' }}</p>
+            <ul>
+              {%- if block.settings.feature_1 != blank -%}
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>{{ block.settings.feature_1 }}</li>
+              {%- endif -%}
+              {%- if block.settings.feature_2 != blank -%}
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>{{ block.settings.feature_2 }}</li>
+              {%- endif -%}
+              {%- if block.settings.feature_3 != blank -%}
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>{{ block.settings.feature_3 }}</li>
+              {%- endif -%}
+            </ul>
+            <a class="btn {% if block.settings.is_featured %}btn-primary{% else %}btn-ghost{% endif %}" href="{{ block.settings.button_link | default: '#shop' }}">
+              {{ block.settings.button_text | default: 'Build this box' }}
+              {%- if block.settings.is_featured -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13m-5-6 6 6-6 6"/></svg>
+              {%- endif -%}
+            </a>
+          </article>
+        {%- endfor -%}
+      {%- else -%}
+        <article class="glass tier rv"><span class="tag">Starter</span><div class="tierpix" aria-hidden="true"><span class="pimg p-combo2" role="img" aria-label="Purelane combo pack"></span></div><div class="qty">2<small>Products</small></div><div class="price">₹349 <s>₹598</s></div><p class="body-s" style="font-size:12px">Flat ₹174 per product</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Pick any two products</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Free shipping across India</li></ul><a class="btn btn-ghost" href="#shop">Build this box</a></article>
+        <article class="glass tier featured rv rv-d2"><span class="tag">Most popular</span><div class="tierpix" aria-hidden="true"><span class="pimg p-kitchen" role="img" aria-label="Purelane kitchen cleaner"></span><span class="pimg p-tap" role="img" aria-label="Purelane tap cleaner"></span><span class="pimg p-dish" role="img" aria-label="Purelane dishwash"></span></div><div class="qty">3<small>Products</small></div><div class="price">₹499 <s>₹897</s></div><p class="body-s" style="font-size:12px">Flat ₹166 per product</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Pick any three products</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Covers kitchen and laundry</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Free shipping across India</li></ul><a class="btn btn-primary" href="#shop">Build this box <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13m-5-6 6 6-6 6"/></svg></a></article>
+        <article class="glass tier rv rv-d3"><span class="tag">Whole home</span><div class="tierpix five" aria-hidden="true"><span class="pimg p-kitchen" role="img" aria-label="Purelane kitchen cleaner"></span><span class="pimg p-tap" role="img" aria-label="Purelane tap cleaner"></span><span class="pimg p-floor" role="img" aria-label="Purelane floor cleaner"></span><span class="pimg p-toilet" role="img" aria-label="Purelane toilet cleaner"></span><span class="pimg p-laundry" role="img" aria-label="Purelane laundry detergent"></span></div><div class="qty">5<small>Products</small></div><div class="price">₹799 <s>₹1,495</s></div><p class="body-s" style="font-size:12px">Flat ₹160 per product</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Pick any five products</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Every room in one order</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Free shipping across India</li></ul><a class="btn btn-ghost" href="#shop">Build this box</a></article>
+      {%- endif -%}
     </div>
   </div>
 </section>

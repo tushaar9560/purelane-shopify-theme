@@ -14,24 +14,32 @@
     <div class="revtrack">
       {%- comment -%}Render cards twice for smooth continuous marquee loop{%- endcomment -%}
       {%- for i in (1..2) -%}
-        {%- for block in section.blocks -%}
-          <article class="glass-2 rcard" {{ block.shopify_attributes }}>
-            <div class="st" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <h5>{{ block.settings.title }}</h5>
-            <p>{{ block.settings.quote }}</p>
-            <div class="who">
-              {%- if block.settings.verified -%}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m5 13 4 4L19 7"/>
-                </svg>
-              {%- endif -%}
-              <b>{{ block.settings.author }}</b>
-              {%- if block.settings.product_tag != blank -%}
-                <span>&middot; {{ block.settings.product_tag }}</span>
-              {%- endif -%}
-            </div>
-          </article>
-        {%- endfor -%}
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            <article class="glass-2 rcard" {{ block.shopify_attributes }}>
+              <div class="st" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <h5>{{ block.settings.title }}</h5>
+              <p>{{ block.settings.quote }}</p>
+              <div class="who">
+                {%- if block.settings.verified -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m5 13 4 4L19 7"/>
+                  </svg>
+                {%- endif -%}
+                <b>{{ block.settings.author }}</b>
+                {%- if block.settings.product_tag != blank -%}
+                  <span>&middot; {{ block.settings.product_tag }}</span>
+                {%- endif -%}
+              </div>
+            </article>
+          {%- endfor -%}
+        {%- else -%}
+          <article class="glass-2 rcard"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><h5>Works like a charm</h5><p>Finally an eco option that cleans as well as the chemical detergent I used for years, and it smells better.</p><div class="who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><b>Anita</b><span>&middot; Kitchen cleaner</span></div></article>
+          <article class="glass-2 rcard"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><h5>No chemical smell</h5><p>My kids have mild allergies. Purelane let us stop worrying about what gets wiped onto dining table and floors.</p><div class="who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><b>Rahul</b><span>&middot; Floor cleaner</span></div></article>
+          <article class="glass-2 rcard"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><h5>Tap cleaner is unreal</h5><p>Three years of hard water scale on our chrome fittings came off on the first try. Genuinely impressed.</p><div class="who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><b>Deepika</b><span>&middot; Tap cleaner</span></div></article>
+          <article class="glass-2 rcard"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><h5>The 3-bottle deal is great</h5><p>₹499 for kitchen, floor and laundry together. Super easy to build the box and shipping was fast.</p><div class="who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><b>Karan</b><span>&middot; Custom bundle</span></div></article>
+          <article class="glass-2 rcard"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><h5>Gentle on clothes</h5><p>Our cottons feel softer and don't have that stiff residue. Even whites came out noticeably bright.</p><div class="who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><b>Meera</b><span>&middot; Laundry liquid</span></div></article>
+        {%- endif -%}
       {%- endfor -%}
     </div>
   </div>
