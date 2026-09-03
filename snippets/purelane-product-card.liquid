@@ -1,18 +1,22 @@
 {% comment %}
-  Purelane product card. Prices and availability come from Shopify.
-  Artwork is the prototype bottle set so the homepage matches purelane-homepage.html.
+  Purelane product card. Price, availability, and media come from Shopify.
   Accepts: product, card_badge, custom_class, delay_class
 {% endcomment %}
 
 {%- liquid
-  assign rating = 4.8
-  assign reviews_count = 230
-  if product.metafields.custom.rating.value != blank
-    assign rating = product.metafields.custom.rating.value
+  assign rating = product.metafields.custom.rating.value
+  assign reviews_count = product.metafields.custom.reviews_count.value
+  if rating == blank or reviews_count == blank
+    for tag in product.tags
+      if rating == blank and tag contains 'rating:'
+        assign rating = tag | split: ':' | last | strip
+      endif
+      if reviews_count == blank and tag contains 'reviews:'
+        assign reviews_count = tag | split: ':' | last | strip
+      endif
+    endfor
   endif
-  if product.metafields.custom.reviews_count.value != blank
-    assign reviews_count = product.metafields.custom.reviews_count.value
-  endif
+
   assign badge = card_badge
   if badge == blank
     assign badge = product.metafields.custom.badge.value
@@ -20,7 +24,7 @@
   if badge == blank
     for tag in product.tags
       if tag contains 'badge:'
-        assign badge = tag | split: ':' | last
+        assign badge = tag | split: ':' | last | strip
         break
       endif
     endfor
@@ -29,73 +33,31 @@
     assign badge = 'Sold out'
   endif
 
-  assign art = product.metafields.custom.illustration.value
-  if art == blank
-    for tag in product.tags
-      if tag contains 'art:'
-        assign art = tag | split: ':' | last
-        break
-      endif
-    endfor
-  endif
-  if art == blank
-    assign haystack = product.handle | append: ' ' | append: product.type | downcase
-    if haystack contains 'tap'
-      assign art = 'p-tap'
-    elsif haystack contains 'kitchen'
-      assign art = 'p-kitchen'
-    elsif haystack contains 'copper' or haystack contains 'brass' or haystack contains 'metal'
-      assign art = 'p-metal'
-    elsif haystack contains 'washing' or haystack contains 'descaler'
-      assign art = 'p-wm'
-    elsif haystack contains 'floor'
-      assign art = 'p-floor'
-    elsif haystack contains 'dish'
-      assign art = 'p-dish'
-    elsif haystack contains 'laundry'
-      assign art = 'p-laundry'
-    elsif haystack contains 'toilet'
-      assign art = 'p-toilet'
-    elsif haystack contains 'handwash'
-      assign art = 'p-handwash'
-    endif
-  endif
-
   assign product_alt = product.title | escape
-  assign use_fallback = false
-  if product.featured_image == blank and art == blank
-    assign use_fallback = true
-  endif
 -%}
 
 <article class="glass card rv {{ delay_class }} {% unless product.available %}sold-out{% endunless %} {{ custom_class }}" data-product-id="{{ product.id }}">
   <div class="shot">
     {%- if badge != blank -%}
-      <span class="pill">{{ badge }}</span>
+      <span class="pill">{{ badge | escape }}</span>
     {%- endif -%}
-
-    {%- if use_fallback -%}
-      <a href="{{ product.url }}" class="purelane-fallback-shot" aria-label="{{ product_alt }}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
-          <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
-        </svg>
-        <span>Purelane Botanical</span>
-      </a>
-    {%- else -%}
-      <a href="{{ product.url }}" class="purelane-shot-link" aria-label="{{ product_alt }}">
-        {% render 'purelane-pimg', art: art, label: product.title %}
-      </a>
-    {%- endif -%}
+    <a href="{{ product.url }}" class="purelane-shot-link" aria-label="{{ product_alt }}">
+      {% render 'purelane-product-art', product: product %}
+    </a>
   </div>
 
   <h4 title="{{ product_alt }}">
     <a href="{{ product.url }}">{{ product.title | escape }}</a>
   </h4>
 
-  <div class="rate">
-    <b>★ {{ rating }}</b> · {{ reviews_count }} reviews
-  </div>
+  {%- if rating != blank -%}
+    <div class="rate">
+      <b>★ {{ rating | escape }}</b>
+      {%- if reviews_count != blank -%}
+        · {{ reviews_count | escape }} reviews
+      {%- endif -%}
+    </div>
+  {%- endif -%}
 
   <div class="pr">
     <strong>{{ product.price | money_without_trailing_zeros }}</strong>

@@ -1,8 +1,8 @@
 <section class="sec" id="shop" data-scene="3">
   <div class="wrap">
     <div class="panel-head rv">
-      <span class="kicker">{{ section.settings.kicker | default: 'Bestsellers' }}</span>
-      <h2 class="d2" style="margin-top:12px">{{ section.settings.heading | default: 'Loved by 30,000 homes' }}</h2>
+      <span class="kicker">{{ section.settings.kicker }}</span>
+      <h2 class="d2" style="margin-top:12px">{{ section.settings.heading }}</h2>
       <div class="rule">
         <i></i>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -13,50 +13,23 @@
       </div>
     </div>
 
-    <div class="shelf">
-      {%- assign current_collection = section.settings.collection -%}
-      {%- if current_collection != blank and current_collection.products_count > 0 -%}
-        {%- for product in current_collection.products limit: section.settings.products_to_show -%}
+    {%- if section.settings.collection != blank and section.settings.collection.products_count > 0 -%}
+      <div class="shelf">
+        {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
           {%- capture delay_class -%}rv-d{{ forloop.index | modulo: 4 }}{%- endcapture -%}
           {% render 'purelane-product-card', product: product, delay_class: delay_class %}
         {%- endfor -%}
-      {%- elsif collections.all.products_count > 0 -%}
+      </div>
+    {%- elsif collections.all.products_count > 0 -%}
+      <div class="shelf">
         {%- for product in collections.all.products limit: section.settings.products_to_show -%}
           {%- capture delay_class -%}rv-d{{ forloop.index | modulo: 4 }}{%- endcapture -%}
           {% render 'purelane-product-card', product: product, delay_class: delay_class %}
         {%- endfor -%}
-      {%- else -%}
-        {%- comment -%}Fallback initial prototype showcase if no products exist yet{%- endcomment -%}
-        <article class="glass card rv">
-          <div class="shot"><span class="pill">Best seller</span><span class="pimg p-tap" role="img" aria-label="Tap cleaner"></span></div>
-          <h4>Tap cleaner &amp; limescale remover</h4>
-          <div class="rate"><b>★ 4.8</b> · 237 reviews</div>
-          <div class="pr"><strong>₹200</strong><s>₹299</s><em>33% off</em></div>
-          <button class="btn btn-ghost btn-sm">Add to cart</button>
-        </article>
-        <article class="glass card rv rv-d1">
-          <div class="shot"><span class="pill">Best seller</span><span class="pimg p-kitchen" role="img" aria-label="Kitchen cleaner"></span></div>
-          <h4>Kitchen cleaner, foaming</h4>
-          <div class="rate"><b>★ 4.8</b> · 254 reviews</div>
-          <div class="pr"><strong>₹200</strong><s>₹299</s><em>33% off</em></div>
-          <button class="btn btn-ghost btn-sm">Add to cart</button>
-        </article>
-        <article class="glass card rv rv-d2">
-          <div class="shot"><span class="pill">Top rated</span><span class="pimg p-metal" role="img" aria-label="Copper, bronze cleaner"></span></div>
-          <h4>Copper, bronze &amp; brass cleaner</h4>
-          <div class="rate"><b>★ 4.8</b> · 231 reviews</div>
-          <div class="pr"><strong>₹200</strong><s>₹299</s><em>33% off</em></div>
-          <button class="btn btn-ghost btn-sm">Add to cart</button>
-        </article>
-        <article class="glass card rv rv-d3">
-          <div class="shot"><span class="pill">New</span><span class="pimg p-wm" role="img" aria-label="Washing machine cleaner"></span></div>
-          <h4>Washing machine cleaner &amp; descaler</h4>
-          <div class="rate"><b>★ 4.8</b> · 183 reviews</div>
-          <div class="pr"><strong>₹200</strong><s>₹299</s><em>33% off</em></div>
-          <button class="btn btn-ghost btn-sm">Add to cart</button>
-        </article>
-      {%- endif -%}
-    </div>
+      </div>
+    {%- else -%}
+      <p class="purelane-empty">Add products to the store, or choose a collection in the theme editor, to fill this shelf.</p>
+    {%- endif -%}
   </div>
 </section>
 
@@ -79,14 +52,15 @@
     {
       "type": "collection",
       "id": "collection",
-      "label": "Collection"
+      "label": "Collection",
+      "info": "Leave empty to show products from the whole catalog."
     },
     {
       "type": "range",
       "id": "products_to_show",
-      "min": 4,
-      "max": 16,
-      "step": 2,
+      "min": 2,
+      "max": 50,
+      "step": 1,
       "default": 8,
       "label": "Products to show"
     }

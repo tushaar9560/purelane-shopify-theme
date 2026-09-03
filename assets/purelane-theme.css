@@ -393,6 +393,11 @@ main{position:relative;z-index:2}
 /* ---------- SHELF ---------- */
 .shelf{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
 @media(min-width:860px){.shelf{grid-template-columns:repeat(4,1fr)}}
+.purelane-empty{text-align:center;max-width:46ch;margin:18px auto 0;color:var(--paper-2);font-size:14.5px;line-height:1.6}
+.card .shot img,.stack .it img,.tierpix img{height:122px;width:auto;max-width:100%;object-fit:contain}
+.stack .it img{height:66px;margin:0 auto 8px;display:block}
+.tierpix img{height:62px}
+.tierpix.five img{height:54px}
 .card{padding:16px;display:flex;flex-direction:column;transition:.4s var(--ease)}
 .card:hover{transform:translateY(-5px)}
 .card .shot{height:150px;border-radius:14px;margin-bottom:14px;display:grid;place-items:center;position:relative;overflow:hidden;

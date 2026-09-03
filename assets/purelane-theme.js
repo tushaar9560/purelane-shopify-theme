@@ -238,14 +238,30 @@
   function initAjaxCart() {
     document.addEventListener('click', function (e) {
       var btn = e.target.closest('.purelane-add-to-cart-btn');
-      if (!btn) return;
+      if (!btn || btn.disabled) return;
       e.preventDefault();
 
+      var itemsAttr = btn.getAttribute('data-items');
       var variantId = btn.getAttribute('data-variant-id');
-      if (!variantId) return;
+      var payload = null;
+
+      if (itemsAttr) {
+        var items = itemsAttr.split(',').map(function (id) {
+          return { id: parseInt(id, 10), quantity: 1 };
+        }).filter(function (item) {
+          return item.id > 0;
+        });
+        if (!items.length) return;
+        payload = { items: items };
+      } else if (variantId) {
+        payload = { id: parseInt(variantId, 10), quantity: 1 };
+      } else {
+        return;
+      }
 
       var originalText = btn.innerHTML;
       btn.classList.add('is-loading');
+      btn.disabled = true;
 
       fetch('/cart/add.js', {
         method: 'POST',
@@ -253,31 +269,33 @@
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({
-          id: parseInt(variantId, 10),
-          quantity: 1
-        })
+        body: JSON.stringify(payload)
       })
-      .then(function (res) { return res.json(); })
-      .then(function (item) {
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok || data.status) throw data;
+          return data;
+        });
+      })
+      .then(function () {
         btn.classList.remove('is-loading');
+        btn.disabled = false;
         btn.innerHTML = 'Added &#10003;';
         setTimeout(function () {
           btn.innerHTML = originalText;
         }, 2200);
 
-        // Fetch updated cart count
         fetch('/cart.js')
           .then(function (res) { return res.json(); })
           .then(function (cart) {
             updateCartBadge(cart.item_count);
-            // If Dawn cart drawer exists, dispatch event
             document.dispatchEvent(new CustomEvent('cart:updated', { detail: cart }));
           });
       })
       .catch(function (err) {
         console.error('Add to cart failed:', err);
         btn.classList.remove('is-loading');
+        btn.disabled = false;
         btn.innerHTML = 'Error';
         setTimeout(function () { btn.innerHTML = originalText; }, 2000);
       });

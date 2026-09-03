@@ -1,0 +1,60 @@
+{% comment %}
+  Product media for cards, combo trays, and bundle previews.
+  Order: merchant illustration metafield or art: tag, then product type,
+  then the Shopify image, then the empty-image fallback.
+  Accepts: product
+{% endcomment %}
+{%- liquid
+  assign art = product.metafields.custom.illustration.value
+  if art == blank
+    for tag in product.tags
+      if tag contains 'art:'
+        assign art = tag | split: ':' | last | strip
+        break
+      endif
+    endfor
+  endif
+  if art == blank
+    assign ptype = product.type | downcase | strip
+    case ptype
+      when 'tap cleaner'
+        assign art = 'p-tap'
+      when 'kitchen cleaner'
+        assign art = 'p-kitchen'
+      when 'metal cleaner'
+        assign art = 'p-metal'
+      when 'appliance cleaner'
+        assign art = 'p-wm'
+      when 'floor cleaner'
+        assign art = 'p-floor'
+      when 'dishwash'
+        assign art = 'p-dish'
+      when 'laundry detergent'
+        assign art = 'p-laundry'
+      when 'toilet cleaner'
+        assign art = 'p-toilet'
+      when 'handwash'
+        assign art = 'p-handwash'
+    endcase
+  endif
+-%}
+{%- if art != blank -%}
+  {% render 'purelane-pimg', art: art, label: product.title %}
+{%- elsif product.featured_image != blank -%}
+  {%- assign shot_url = product.featured_image | image_url: width: 400 -%}
+  <img
+    src="{{ shot_url }}"
+    alt="{{ product.featured_image.alt | default: product.title | escape }}"
+    width="{{ product.featured_image.width }}"
+    height="{{ product.featured_image.height }}"
+    loading="lazy"
+  >
+{%- else -%}
+  <span class="purelane-fallback-shot" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+      <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+    </svg>
+    <span>Purelane Botanical</span>
+  </span>
+{%- endif -%}

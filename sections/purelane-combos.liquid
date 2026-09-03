@@ -1,8 +1,8 @@
 <section class="sec" id="combos" data-scene="3">
   <div class="wrap">
     <div class="panel-head rv">
-      <span class="kicker">{{ section.settings.kicker | default: 'Pre-built to save you money' }}</span>
-      <h2 class="d2" style="margin-top:12px">{{ section.settings.heading | default: 'Best selling combos' }}</h2>
+      <span class="kicker">{{ section.settings.kicker }}</span>
+      <h2 class="d2" style="margin-top:12px">{{ section.settings.heading }}</h2>
       <div class="rule">
         <i></i>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -11,74 +11,146 @@
         </svg>
         <i></i>
       </div>
-      <p class="lede" style="margin:14px auto 0">{{ section.settings.lede | default: 'Swipe through the boxes people order most. Each one is already priced below buying the same products on their own.' }}</p>
+      {%- if section.settings.lede != blank -%}
+        <p class="lede" style="margin:14px auto 0">{{ section.settings.lede }}</p>
+      {%- endif -%}
     </div>
 
-        <div class="comborail rv">
-      {%- if section.blocks.size > 0 -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="comborail rv">
         {%- for block in section.blocks -%}
+          {%- liquid
+            assign combo_products = block.settings.products
+            assign combo_count = 0
+            assign price_total = 0
+            assign compare_total = 0
+            assign variant_ids = ''
+            assign include_names = ''
+            if combo_products != blank
+              assign combo_count = combo_products.size
+              for product in combo_products
+                assign price_total = price_total | plus: product.price
+                if product.compare_at_price > product.price
+                  assign compare_total = compare_total | plus: product.compare_at_price
+                else
+                  assign compare_total = compare_total | plus: product.price
+                endif
+                if product.available and product.selected_or_first_available_variant
+                  if variant_ids == blank
+                    assign variant_ids = product.selected_or_first_available_variant.id
+                  else
+                    assign variant_ids = variant_ids | append: ',' | append: product.selected_or_first_available_variant.id
+                  endif
+                endif
+                if include_names == blank
+                  assign include_names = product.title
+                else
+                  assign include_names = include_names | append: ', ' | append: product.title
+                endif
+              endfor
+            endif
+
+            assign sale_price = price_total
+            if block.settings.bundle_price != blank
+              assign override_rupees = block.settings.bundle_price | replace: '₹', '' | replace: ',', '' | replace: ' ', ''
+              if override_rupees != blank
+                assign sale_price = override_rupees | times: 100
+              endif
+            endif
+            assign savings = 0
+            if compare_total > sale_price
+              assign savings = compare_total | minus: sale_price
+            endif
+          -%}
+
           <article class="glass combo {% if block.settings.is_hero %}hero-combo{% endif %}" {{ block.shopify_attributes }}>
             <div class="tray">
-              {%- if block.settings.save_badge != blank -%}
-                <span class="save">{{ block.settings.save_badge }}</span>
+              {%- if savings > 0 -%}
+                <span class="save">
+                  {%- if block.settings.save_badge != blank -%}
+                    {{ block.settings.save_badge | escape }}
+                  {%- else -%}
+                    You save {{ savings | money_without_trailing_zeros }}
+                  {%- endif -%}
+                </span>
+              {%- elsif block.settings.save_badge != blank -%}
+                <span class="save">{{ block.settings.save_badge | escape }}</span>
               {%- endif -%}
               {%- if block.settings.flag != blank -%}
-                <span class="flag">{{ block.settings.flag }}</span>
+                <span class="flag">{{ block.settings.flag | escape }}</span>
               {%- endif -%}
               <div class="stack">
-                {%- if block.settings.benefit1 != blank -%}
-                  <span class="it">
-                    {% render 'purelane-pimg', art: block.settings.img1_class, label: block.settings.benefit1 %}
-                    <span>{{ block.settings.benefit1 }}</span>
-                  </span>
-                {%- endif -%}
-                {%- if block.settings.benefit2 != blank -%}
-                  <span class="plus" aria-hidden="true">+</span>
-                  <span class="it">
-                    {% render 'purelane-pimg', art: block.settings.img2_class, label: block.settings.benefit2 %}
-                    <span>{{ block.settings.benefit2 }}</span>
-                  </span>
-                {%- endif -%}
-                {%- if block.settings.benefit3 != blank -%}
-                  <span class="plus" aria-hidden="true">+</span>
-                  <span class="it">
-                    {% render 'purelane-pimg', art: block.settings.img3_class, label: block.settings.benefit3 %}
-                    <span>{{ block.settings.benefit3 }}</span>
-                  </span>
+                {%- if combo_count > 0 -%}
+                  {%- for product in combo_products -%}
+                    {%- unless forloop.first -%}
+                      <span class="plus" aria-hidden="true">+</span>
+                    {%- endunless -%}
+                    <span class="it">
+                      {% render 'purelane-product-art', product: product %}
+                      <span>
+                        {%- if product.metafields.custom.key_benefit.value != blank -%}
+                          {{ product.metafields.custom.key_benefit.value | escape }}
+                        {%- else -%}
+                          {{ product.title | escape }}
+                        {%- endif -%}
+                      </span>
+                    </span>
+                  {%- endfor -%}
                 {%- endif -%}
               </div>
             </div>
             <div class="body">
-              <h3>{{ block.settings.title }}</h3>
-              <div class="cnt">{{ block.settings.count_text }}</div>
-              <p class="inc">{{ block.settings.includes_text }}</p>
-              <div class="prow">
-                <strong>{{ block.settings.price }}</strong>
-                <s>{{ block.settings.compare_price }}</s>
-                <em>{{ block.settings.discount_pill }}</em>
-              </div>
-              <div class="fine">Inclusive of all taxes &middot; COD available</div>
-              <a class="btn {% if block.settings.is_hero %}btn-primary{% else %}btn-ghost{% endif %}" href="{{ block.settings.button_url | default: '#bundles' }}">
-                Shop bundle
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg>
-              </a>
+              <h3>{{ block.settings.title | escape }}</h3>
+              {%- if combo_count > 0 -%}
+                <div class="cnt">{{ combo_count }} {% if combo_count == 1 %}product{% else %}products{% endif %}</div>
+              {%- endif -%}
+              {%- if block.settings.includes_text != blank -%}
+                <p class="inc">{{ block.settings.includes_text | escape }}</p>
+              {%- elsif include_names != blank -%}
+                <p class="inc">Includes: {{ include_names | escape }}.</p>
+              {%- endif -%}
+              {%- if combo_count > 0 -%}
+                <div class="prow">
+                  <strong>{{ sale_price | money_without_trailing_zeros }}</strong>
+                  {%- if compare_total > sale_price -%}
+                    <s>{{ compare_total | money_without_trailing_zeros }}</s>
+                    <em>Save {{ savings | money_without_trailing_zeros }}</em>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+              {%- if section.settings.fine_print != blank -%}
+                <div class="fine">{{ section.settings.fine_print | escape }}</div>
+              {%- endif -%}
+              {%- if variant_ids != blank -%}
+                <button
+                  type="button"
+                  class="btn {% if block.settings.is_hero %}btn-primary{% else %}btn-ghost{% endif %} purelane-add-to-cart-btn"
+                  data-items="{{ variant_ids }}"
+                  aria-label="Add {{ block.settings.title | escape }} to cart"
+                >
+                  Shop bundle
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13m-5-6 6 6-6 6"/></svg>
+                </button>
+              {%- elsif block.settings.button_url != blank -%}
+                <a class="btn {% if block.settings.is_hero %}btn-primary{% else %}btn-ghost{% endif %}" href="{{ block.settings.button_url }}">
+                  Shop bundle
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13m-5-6 6 6-6 6"/></svg>
+                </a>
+              {%- endif -%}
             </div>
           </article>
         {%- endfor -%}
-      {%- else -%}
-        <article class="glass combo"><div class="tray"><span class="save">You save ₹248</span><div class="stack"><span class="it"><span class="pimg p-kitchen" role="img" aria-label="Kitchen cleaner"></span><span>Cuts grease instantly</span></span><span class="plus" aria-hidden="true">+</span><span class="it"><span class="pimg p-dish" role="img" aria-label="Dishwash gel"></span><span>Tough on stains, kind to hands</span></span></div></div><div class="body"><h3>Kitchen essentials</h3><div class="cnt">2 products</div><p class="inc">Includes: Kitchen Cleaner &amp; Dishwash Gel. Everyday power for stovetops, counters and dishes.</p><div class="prow"><strong>₹349</strong><s>₹597</s><em>Save ₹248</em></div><div class="fine">Inclusive of all taxes &middot; COD available</div><a class="btn btn-ghost" href="#bundles">Shop bundle <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg></a></div></article>
-        <article class="glass combo"><div class="tray"><span class="save">You save ₹448</span><div class="stack"><span class="it"><span class="pimg p-laundry" role="img" aria-label="Laundry detergent"></span><span>Removes tough stains &amp; odour</span></span><span class="plus" aria-hidden="true">+</span><span class="it"><span class="pimg p-wm" role="img" aria-label="Washing machine cleaner"></span><span>Deep-cleans your machine</span></span></div></div><div class="body"><h3>Laundry care bundle</h3><div class="cnt">3 products</div><p class="inc">Includes: Laundry Detergent, Fabric Conditioner &amp; Machine Cleaner Powder. Softer, fresher wash, all in one box.</p><div class="prow"><strong>₹499</strong><s>₹947</s><em>Save ₹448</em></div><div class="fine">Inclusive of all taxes &middot; COD available</div><a class="btn btn-ghost" href="#bundles">Shop bundle <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg></a></div></article>
-        <article class="glass combo hero-combo"><div class="tray"><span class="save">Biggest saving</span><span class="flag">Best value</span><div class="stack"><span class="it"><span class="pimg p-kitchen" role="img" aria-label="Kitchen cleaner"></span><span>Cuts grease instantly</span></span><span class="plus" aria-hidden="true">+</span><span class="it"><span class="pimg p-floor" role="img" aria-label="Floor cleaner"></span><span>Kills 99.9% germs</span></span><span class="plus" aria-hidden="true">+</span><span class="it"><span class="pimg p-handwash" role="img" aria-label="Handwash"></span><span>Gentle hydration for hands</span></span></div></div><div class="body"><h3>Complete home bundle</h3><div class="cnt">5 products</div><p class="inc">Includes: Kitchen Cleaner, Laundry Detergent, Floor Cleaner, Toilet Cleaner &amp; Handwash. Our biggest saving box.</p><div class="prow"><strong>₹799</strong><s>₹1,495</s><em>Save ₹696</em></div><div class="fine">Inclusive of all taxes &middot; COD available</div><a class="btn btn-primary" href="#bundles">Shop bundle <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg></a></div></article>
-        <article class="glass combo"><div class="tray"><span class="save">You save ₹398</span><div class="stack"><span class="it"><span class="pimg p-toilet" role="img" aria-label="Toilet cleaner"></span><span>Kills 99.9% germs</span></span><span class="plus" aria-hidden="true">+</span><span class="it"><span class="pimg p-tap" role="img" aria-label="Tap cleaner"></span><span>Melts hard water stains</span></span><span class="plus" aria-hidden="true">+</span><span class="it"><span class="pimg p-eraser" role="img" aria-label="Magic eraser"></span><span>Scrubs away soap scum</span></span></div></div><div class="body"><h3>Bathroom deep clean</h3><div class="cnt">3 products</div><p class="inc">Includes: Toilet Cleaner, Tap Cleaner &amp; Magic Eraser. A complete bathroom refresh in one box.</p><div class="prow"><strong>₹499</strong><s>₹897</s><em>Save ₹398</em></div><div class="fine">Inclusive of all taxes &middot; COD available</div><a class="btn btn-ghost" href="#bundles">Shop bundle <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg></a></div></article>
-        <article class="glass combo"><div class="tray"><span class="save">You save ₹249</span><div class="stack"><span class="it"><span class="pimg p-tap" role="img" aria-label="Tap cleaner"></span><span>Melts hard water stains</span></span><span class="plus" aria-hidden="true">+</span><span class="it"><span class="pimg p-toilet" role="img" aria-label="Toilet cleaner"></span><span>Fights limescale in the bowl</span></span></div></div><div class="body"><h3>Hard water solution kit</h3><div class="cnt">2 products</div><p class="inc">Includes: Tap Cleaner &amp; Toilet Cleaner. A quick, focused fix for hard water stains across the home.</p><div class="prow"><strong>₹349</strong><s>₹598</s><em>Save ₹249</em></div><div class="fine">Inclusive of all taxes &middot; COD available</div><a class="btn btn-ghost" href="#bundles">Shop bundle <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg></a></div></article>
+      </div>
+      <div class="swipecue" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg>
+        Swipe for more combos
+      </div>
+      {%- if section.settings.railnote != blank -%}
+        <p class="railnote">{{ section.settings.railnote }}</p>
       {%- endif -%}
-    </div>
-
-    <div class="swipecue" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg>
-      Swipe for more combos
-    </div>
-    <p class="railnote">{{ section.settings.railnote | default: 'Tapping "Shop bundle" opens the bundle picker with these products already added. You can still swap anything before you pay.' }}</p>
+    {%- else -%}
+      <p class="purelane-empty">Add combo cards in the theme editor and pick the products that belong in each box.</p>
+    {%- endif -%}
   </div>
 </section>
 
@@ -106,9 +178,15 @@
     },
     {
       "type": "text",
+      "id": "fine_print",
+      "label": "Price footnote",
+      "default": "Inclusive of all taxes · COD available"
+    },
+    {
+      "type": "text",
       "id": "railnote",
-      "label": "Bottom Footnote",
-      "default": "Tapping \"Shop bundle\" opens the bundle picker with these products already added. You can still swap anything before you pay."
+      "label": "Bottom footnote",
+      "default": "Shop bundle adds these products to your cart. You can still change quantities before you pay."
     }
   ],
   "blocks": [
@@ -119,109 +197,49 @@
         {
           "type": "checkbox",
           "id": "is_hero",
-          "label": "Highlight as Hero Combo",
+          "label": "Highlight as hero combo",
           "default": false
         },
         {
           "type": "text",
-          "id": "save_badge",
-          "label": "Savings Badge",
-          "default": "You save ₹398"
-        },
-        {
-          "type": "text",
-          "id": "flag",
-          "label": "Optional Flag (e.g. Most popular, Best value)",
-          "default": "Most popular"
-        },
-        {
-          "type": "text",
           "id": "title",
-          "label": "Combo Title",
+          "label": "Combo title",
           "default": "Kitchen essentials"
         },
         {
           "type": "text",
-          "id": "count_text",
-          "label": "Product Count",
-          "default": "3 products"
+          "id": "flag",
+          "label": "Optional flag",
+          "info": "e.g. Most popular, Best value"
+        },
+        {
+          "type": "product_list",
+          "id": "products",
+          "label": "Products in this combo",
+          "limit": 12
+        },
+        {
+          "type": "text",
+          "id": "bundle_price",
+          "label": "Sale price override",
+          "info": "Optional. Leave blank to charge the live sum of the selected products. Enter a number in the store currency, e.g. 499."
+        },
+        {
+          "type": "text",
+          "id": "save_badge",
+          "label": "Savings badge override"
         },
         {
           "type": "textarea",
           "id": "includes_text",
-          "label": "Includes Description",
-          "default": "Includes: Foaming Kitchen Cleaner, Dishwash Gel & Tap Cleaner. Everything for a sparkling kitchen, no need to pick separately."
-        },
-        {
-          "type": "text",
-          "id": "price",
-          "label": "Price",
-          "default": "₹499"
-        },
-        {
-          "type": "text",
-          "id": "compare_price",
-          "label": "Compare Price",
-          "default": "₹897"
-        },
-        {
-          "type": "text",
-          "id": "discount_pill",
-          "label": "Discount Text",
-          "default": "Save ₹398"
+          "label": "Includes description override",
+          "info": "Leave blank to list the selected product titles."
         },
         {
           "type": "text",
           "id": "button_url",
-          "label": "Bundle Link"
-        },
-        {
-          "type": "header",
-          "content": "Product 1 Preview"
-        },
-        {
-          "type": "text",
-          "id": "img1_class",
-          "label": "Image CSS Class 1",
-          "default": "p-kitchen"
-        },
-        {
-          "type": "text",
-          "id": "benefit1",
-          "label": "Benefit Label 1",
-          "default": "Cuts grease instantly"
-        },
-        {
-          "type": "header",
-          "content": "Product 2 Preview"
-        },
-        {
-          "type": "text",
-          "id": "img2_class",
-          "label": "Image CSS Class 2",
-          "default": "p-dish"
-        },
-        {
-          "type": "text",
-          "id": "benefit2",
-          "label": "Benefit Label 2",
-          "default": "Squeaky clean dishes"
-        },
-        {
-          "type": "header",
-          "content": "Product 3 Preview"
-        },
-        {
-          "type": "text",
-          "id": "img3_class",
-          "label": "Image CSS Class 3",
-          "default": "p-tap"
-        },
-        {
-          "type": "text",
-          "id": "benefit3",
-          "label": "Benefit Label 3",
-          "default": "Melts hard water stains"
+          "label": "Fallback link",
+          "info": "Used only when none of the selected products can be added to cart."
         }
       ]
     }
@@ -234,96 +252,7 @@
           "type": "combo",
           "settings": {
             "title": "Kitchen essentials",
-            "count_text": "3 products",
-            "save_badge": "You save ₹398",
-            "flag": "Most popular",
-            "includes_text": "Includes: Foaming Kitchen Cleaner, Dishwash Gel & Tap Cleaner. Everything for a sparkling kitchen, no need to pick separately.",
-            "price": "₹499",
-            "compare_price": "₹897",
-            "discount_pill": "Save ₹398",
-            "img1_class": "p-kitchen",
-            "benefit1": "Cuts grease instantly",
-            "img2_class": "p-dish",
-            "benefit2": "Squeaky clean dishes",
-            "img3_class": "p-tap",
-            "benefit3": "Melts hard water stains"
-          }
-        },
-        {
-          "type": "combo",
-          "settings": {
-            "title": "Laundry care bundle",
-            "count_text": "3 products",
-            "save_badge": "You save ₹448",
-            "flag": "",
-            "includes_text": "Includes: Laundry Detergent, Fabric Conditioner & Machine Cleaner Powder. Softer, fresher wash, all in one box.",
-            "price": "₹499",
-            "compare_price": "₹947",
-            "discount_pill": "Save ₹448",
-            "img1_class": "p-laundry",
-            "benefit1": "Removes tough stains & odour",
-            "img2_class": "p-wm",
-            "benefit2": "Deep-cleans your machine",
-            "img3_class": "",
-            "benefit3": ""
-          }
-        },
-        {
-          "type": "combo",
-          "settings": {
-            "is_hero": true,
-            "title": "Complete home bundle",
-            "count_text": "5 products",
-            "save_badge": "Biggest saving",
-            "flag": "Best value",
-            "includes_text": "Includes: Kitchen Cleaner, Laundry Detergent, Floor Cleaner, Toilet Cleaner & Handwash. Our biggest saving box.",
-            "price": "₹799",
-            "compare_price": "₹1,495",
-            "discount_pill": "Save ₹696",
-            "img1_class": "p-kitchen",
-            "benefit1": "Cuts grease instantly",
-            "img2_class": "p-floor",
-            "benefit2": "Kills 99.9% germs",
-            "img3_class": "p-handwash",
-            "benefit3": "Gentle hydration for hands"
-          }
-        },
-        {
-          "type": "combo",
-          "settings": {
-            "title": "Bathroom deep clean",
-            "count_text": "3 products",
-            "save_badge": "You save ₹398",
-            "flag": "",
-            "includes_text": "Includes: Toilet Cleaner, Tap Cleaner & Magic Eraser. A complete bathroom refresh in one box.",
-            "price": "₹499",
-            "compare_price": "₹897",
-            "discount_pill": "Save ₹398",
-            "img1_class": "p-toilet",
-            "benefit1": "Kills 99.9% germs",
-            "img2_class": "p-tap",
-            "benefit2": "Melts hard water stains",
-            "img3_class": "p-eraser",
-            "benefit3": "Scrubs away soap scum"
-          }
-        },
-        {
-          "type": "combo",
-          "settings": {
-            "title": "Hard water solution kit",
-            "count_text": "2 products",
-            "save_badge": "You save ₹249",
-            "flag": "",
-            "includes_text": "Includes: Tap Cleaner & Toilet Cleaner. A quick, focused fix for hard water stains across the home.",
-            "price": "₹349",
-            "compare_price": "₹598",
-            "discount_pill": "Save ₹249",
-            "img1_class": "p-tap",
-            "benefit1": "Melts hard water stains",
-            "img2_class": "p-toilet",
-            "benefit2": "Fights limescale in the bowl",
-            "img3_class": "",
-            "benefit3": ""
+            "flag": "Most popular"
           }
         }
       ]

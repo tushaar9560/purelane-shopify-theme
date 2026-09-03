@@ -205,100 +205,71 @@
           "type": "combo",
           "settings": {
             "is_hero": false,
-            "save_badge": "You save \u20b9398",
-            "flag": "Most popular",
             "title": "Kitchen essentials",
-            "count_text": "3 products",
-            "includes_text": "Includes: Foaming Kitchen Cleaner, Dishwash Gel & Tap Cleaner. Everything for a sparkling kitchen, no need to pick separately.",
-            "price": "\u20b9499",
-            "compare_price": "\u20b9897",
-            "discount_pill": "Save \u20b9398",
-            "img1_class": "p-kitchen",
-            "benefit1": "Cuts grease instantly",
-            "img2_class": "p-dish",
-            "benefit2": "Squeaky clean dishes",
-            "img3_class": "p-tap",
-            "benefit3": "Melts hard water stains"
+            "flag": "Most popular",
+            "products": [
+              "purelane-foaming-kitchen-cleaner",
+              "purelane-organic-coconut-dishwash-gel",
+              "purelane-tap-cleaner"
+            ],
+            "includes_text": "Includes: Foaming Kitchen Cleaner, Dishwash Gel & Tap Cleaner. Everything for a sparkling kitchen, no need to pick separately."
           }
         },
         "combo_2": {
           "type": "combo",
           "settings": {
             "is_hero": false,
-            "save_badge": "You save \u20b9448",
-            "flag": "",
             "title": "Laundry care bundle",
-            "count_text": "3 products",
-            "includes_text": "Includes: Laundry Detergent, Fabric Conditioner & Machine Cleaner Powder. Softer, fresher wash, all in one box.",
-            "price": "\u20b9499",
-            "compare_price": "\u20b9947",
-            "discount_pill": "Save \u20b9448",
-            "img1_class": "p-laundry",
-            "benefit1": "Removes tough stains & odour",
-            "img2_class": "tile",
-            "benefit2": "Softens & freshens every wash",
-            "img3_class": "p-wm",
-            "benefit3": "Deep-cleans your machine"
+            "flag": "",
+            "products": [
+              "purelane-ultraconcentrated-hypoallergenic-laundry-detergent-lemongrass-1000ml",
+              "purelane-washing-machine-cleaner-descaler"
+            ],
+            "includes_text": "Includes: Laundry Detergent and Machine Cleaner. Softer, fresher wash, all in one box."
           }
         },
         "combo_3": {
           "type": "combo",
           "settings": {
             "is_hero": true,
-            "save_badge": "Biggest saving",
-            "flag": "Best value",
             "title": "Complete home bundle",
-            "count_text": "5 products",
-            "includes_text": "Includes: Kitchen Cleaner, Laundry Detergent, Floor Cleaner, Toilet Cleaner & Handwash. Our biggest saving box.",
-            "price": "\u20b9799",
-            "compare_price": "\u20b91,495",
-            "discount_pill": "Save \u20b9696",
-            "img1_class": "p-kitchen",
-            "benefit1": "Cuts grease instantly",
-            "img2_class": "p-floor",
-            "benefit2": "Kills 99.9% germs",
-            "img3_class": "p-handwash",
-            "benefit3": "Gentle hydration for hands"
+            "flag": "Best value",
+            "save_badge": "Biggest saving",
+            "products": [
+              "purelane-foaming-kitchen-cleaner",
+              "purelane-ultraconcentrated-hypoallergenic-laundry-detergent-lemongrass-1000ml",
+              "purelane-natural-herbal-floor-cleaner",
+              "purelane-tap-cleaner",
+              "purelane-copper-bronze-brass-cleaner"
+            ],
+            "includes_text": "Includes: Kitchen Cleaner, Laundry Detergent, Floor Cleaner, Tap Cleaner & Metal Cleaner. Our biggest saving box."
           }
         },
         "combo_4": {
           "type": "combo",
           "settings": {
             "is_hero": false,
-            "save_badge": "You save \u20b9398",
-            "flag": "",
             "title": "Bathroom deep clean",
-            "count_text": "3 products",
-            "includes_text": "Includes: Toilet Cleaner, Tap Cleaner & Magic Eraser. A complete bathroom refresh in one box.",
-            "price": "\u20b9499",
-            "compare_price": "\u20b9897",
-            "discount_pill": "Save \u20b9398",
-            "img1_class": "p-toilet",
-            "benefit1": "Kills 99.9% germs",
-            "img2_class": "p-tap",
-            "benefit2": "Melts hard water stains",
-            "img3_class": "p-eraser",
-            "benefit3": "Scrubs away soap scum"
+            "flag": "",
+            "products": [
+              "purelane-tap-cleaner",
+              "purelane-natural-herbal-floor-cleaner",
+              "purelane-organic-coconut-dishwash-gel"
+            ],
+            "includes_text": "Includes: Tap Cleaner, Floor Cleaner & Dishwash Gel. A complete wet-area refresh in one box."
           }
         },
         "combo_5": {
           "type": "combo",
           "settings": {
             "is_hero": false,
-            "save_badge": "You save \u20b9249",
-            "flag": "",
             "title": "Hard water solution kit",
-            "count_text": "2 products",
-            "includes_text": "Includes: Tap Cleaner & Toilet Cleaner. A quick, focused fix for hard water stains across the home.",
-            "price": "\u20b9349",
-            "compare_price": "\u20b9598",
-            "discount_pill": "Save \u20b9249",
-            "img1_class": "p-tap",
-            "benefit1": "Melts hard water stains",
-            "img2_class": "p-toilet",
-            "benefit2": "Fights limescale in the bowl",
-            "img3_class": "",
-            "benefit3": ""
+            "flag": "",
+            "products": [
+              "purelane-tap-cleaner",
+              "purelane-copper-bronze-brass-cleaner"
+            ],
+            "includes_text": "Includes: Tap Cleaner & Metal Cleaner. A focused fix for hard water stains and dull fittings."
           }
         }
       },
@@ -313,7 +284,8 @@
         "kicker": "Pre-built to save you money",
         "heading": "Best selling combos",
         "lede": "Swipe through the boxes people order most. Each one is already priced below buying the same products on their own.",
-        "railnote": "Tapping Shop bundle opens the bundle picker with these products already added. You can still swap anything before you pay."
+        "railnote": "Shop bundle adds these products to your cart. You can still change quantities before you pay.",
+        "fine_print": "Inclusive of all taxes \u00b7 COD available"
       }
     },
     "purelane_bundles": {
@@ -324,18 +296,17 @@
           "settings": {
             "is_featured": false,
             "tag": "Starter",
-            "pix_count": "1",
-            "product_count": "2",
-            "product_count_unit": "Products",
-            "price": "\u20b9349",
-            "compare_price": "\u20b9598",
-            "rate_note": "Flat \u20b9174 per product",
+            "products": [
+              "purelane-tap-cleaner",
+              "purelane-foaming-kitchen-cleaner"
+            ],
+            "product_count": 2,
+            "bundle_price": "349",
             "feature_1": "Pick any two products",
             "feature_2": "Free shipping across India",
             "feature_3": "",
             "button_text": "Build this box",
-            "button_link": "#shop",
-            "delay_class": ""
+            "button_link": "#shop"
           }
         },
         "tier_2": {
@@ -343,18 +314,18 @@
           "settings": {
             "is_featured": true,
             "tag": "Most popular",
-            "pix_count": "3",
-            "product_count": "3",
-            "product_count_unit": "Products",
-            "price": "\u20b9499",
-            "compare_price": "\u20b9897",
-            "rate_note": "Flat \u20b9166 per product",
+            "products": [
+              "purelane-foaming-kitchen-cleaner",
+              "purelane-tap-cleaner",
+              "purelane-organic-coconut-dishwash-gel"
+            ],
+            "product_count": 3,
+            "bundle_price": "499",
             "feature_1": "Pick any three products",
             "feature_2": "Covers kitchen and laundry",
             "feature_3": "Free shipping across India",
             "button_text": "Build this box",
-            "button_link": "#shop",
-            "delay_class": "rv-d2"
+            "button_link": "#shop"
           }
         },
         "tier_3": {
@@ -362,18 +333,20 @@
           "settings": {
             "is_featured": false,
             "tag": "Whole home",
-            "pix_count": "5",
-            "product_count": "5",
-            "product_count_unit": "Products",
-            "price": "\u20b9799",
-            "compare_price": "\u20b91495",
-            "rate_note": "Flat \u20b9160 per product",
+            "products": [
+              "purelane-foaming-kitchen-cleaner",
+              "purelane-tap-cleaner",
+              "purelane-natural-herbal-floor-cleaner",
+              "purelane-ultraconcentrated-hypoallergenic-laundry-detergent-lemongrass-1000ml",
+              "purelane-copper-bronze-brass-cleaner"
+            ],
+            "product_count": 5,
+            "bundle_price": "799",
             "feature_1": "Pick any five products",
             "feature_2": "Every room in one order",
             "feature_3": "Free shipping across India",
             "button_text": "Build this box",
-            "button_link": "#shop",
-            "delay_class": "rv-d3"
+            "button_link": "#shop"
           }
         }
       },
